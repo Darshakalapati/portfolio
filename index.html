@@ -799,9 +799,12 @@ function buildPortrait(canvas,opt){
       for(let x=0;x<ow;x+=density){
         const i=(y*ow+x)*4, a=data[i+3];
         if(a>70){
+          // lift shadows + subtle cool tint so the face reads on a dark background
+          let r=data[i],g=data[i+1],b=data[i+2];
+          r=Math.min(255,48+r*0.94)|0; g=Math.min(255,58+g*0.92)|0; b=Math.min(255,90+b*0.95)|0;
           parts.push({tx:x,ty:y,
-            x:ow/2+(Math.random()-0.5)*ow*1.6, y:oh/2+(Math.random()-0.5)*oh*1.6,
-            r:data[i],g:data[i+1],b:data[i+2]});
+            x:ow/2+(Math.random()-0.5)*ow*1.7, y:oh/2+(Math.random()-0.5)*oh*1.7,
+            r:r,g:g,b:b});
         }
       }
     }
@@ -812,7 +815,7 @@ function buildPortrait(canvas,opt){
     const mouse={x:-9999,y:-9999};
     canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mouse.x=(e.clientX-r.left)/r.width*ow;mouse.y=(e.clientY-r.top)/r.height*oh;},{passive:true});
     canvas.addEventListener('pointerleave',()=>{mouse.x=-9999;mouse.y=-9999;});
-    const dotBase=density*0.52;
+    const dotBase=density*0.64;
     function frame(){
       const sw=canvas.width/ow, sh=canvas.height/oh;
       ctx.clearRect(0,0,canvas.width,canvas.height);
@@ -831,7 +834,7 @@ function buildPortrait(canvas,opt){
     frame();
   });
 }
-if(document.getElementById('aboutPortrait')) buildPortrait(document.getElementById('aboutPortrait'),{density:4});
+if(document.getElementById('aboutPortrait')) buildPortrait(document.getElementById('aboutPortrait'),{density:3});
 
 /* ============ Cinematic intro overlay ============ */
 (function(){
