@@ -231,12 +231,50 @@
   /* scroll progress */
   #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:60;box-shadow:0 0 12px var(--cyan)}
 
+  /* ===== Interactive particle portrait ===== */
+  .portrait-stage{position:relative;width:100%;max-width:340px;margin:0 auto}
+  .portrait-stage .pcanvas{width:100%;aspect-ratio:300/385;display:block;cursor:crosshair}
+  .portrait-stage .pglow{position:absolute;left:50%;top:42%;width:78%;height:70%;transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse at center,rgba(139,92,246,.30),rgba(34,211,238,.12) 45%,transparent 70%);
+    filter:blur(24px);z-index:-1;pointer-events:none}
+  .portrait-hint{text-align:center;font-family:'JetBrains Mono';font-size:.72rem;color:var(--dim);margin-top:10px;letter-spacing:.04em}
+
+  /* ===== About-me panel ===== */
+  .aboutme{display:grid;grid-template-columns:0.82fr 1.18fr;gap:46px;align-items:center;margin-bottom:66px}
+  .aboutme .am-copy .kicker{font-family:'JetBrains Mono';font-size:.82rem;color:var(--cyan);letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:12px}
+  .aboutme .am-copy h3{font-family:'Space Grotesk';font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:700;margin-bottom:16px;line-height:1.12}
+  .aboutme .am-copy h3 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .aboutme .am-copy p{color:var(--muted);font-size:1.04rem;margin-bottom:14px}
+  .aboutme .am-copy .sign{font-family:'Space Grotesk';color:var(--text);font-weight:600;margin-top:6px}
+
+  /* ===== Cinematic intro overlay ===== */
+  #intro{position:fixed;inset:0;z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+    background:radial-gradient(1200px 820px at 50% 32%,#1a0c3a 0%,#0a0620 62%,#050310 100%);
+    transition:opacity 1s ease,visibility 1s;padding:24px}
+  #intro.hide{opacity:0;visibility:hidden}
+  #intro .ip-stage{width:min(56vw,210px);aspect-ratio:300/385;position:relative}
+  #intro .ip-stage .pcanvas{width:100%;height:100%;display:block}
+  #intro .ip-stage .pglow{position:absolute;left:50%;top:42%;width:80%;height:72%;transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse at center,rgba(139,92,246,.4),rgba(34,211,238,.15) 45%,transparent 70%);filter:blur(26px);z-index:-1}
+  #intro .ip-name{font-family:'Space Grotesk';font-weight:700;font-size:clamp(1.7rem,5vw,2.9rem);text-align:center;
+    opacity:0;transform:translateY(16px);animation:ipRise .9s .3s forwards cubic-bezier(.2,.8,.2,1)}
+  #intro .ip-name .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  #intro .ip-line{color:var(--muted);font-size:clamp(.98rem,2.4vw,1.28rem);min-height:1.5em;text-align:center;font-weight:400}
+  #intro .ip-line .cur{display:inline-block;width:2px;height:1.05em;background:var(--cyan);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(2) infinite}
+  #intro .ip-skip{position:absolute;bottom:26px;right:26px;font-size:.82rem;color:var(--muted);border:1px solid var(--stroke);
+    background:var(--panel);padding:9px 16px;border-radius:10px;cursor:pointer;transition:.25s;font-family:'Inter'}
+  #intro .ip-skip:hover{color:var(--text);border-color:var(--cyan)}
+  @keyframes ipRise{to{opacity:1;transform:none}}
+
   /* RESPONSIVE */
   @media(max-width:900px){
     .hero-grid{grid-template-columns:1fr;gap:10px}
     .orb-wrap{min-height:300px;order:-1}
     #orb-canvas{height:300px}
     .about-grid,.two-col{grid-template-columns:1fr}
+    .aboutme{grid-template-columns:1fr;gap:24px}
+    .aboutme .portrait-stage{max-width:260px}
+    .aboutme .am-copy{text-align:center}
     .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);flex-direction:column;justify-content:center;
       background:rgba(8,11,20,0.97);backdrop-filter:blur(18px);gap:6px;transform:translateX(100%);transition:.4s;border-left:1px solid var(--stroke);padding:40px}
     .nav-links.open{transform:none}
@@ -255,6 +293,13 @@
 </style>
 </head>
 <body>
+<div id="intro">
+  <div class="ip-stage"><div class="pglow"></div><canvas class="pcanvas" id="introPortrait"></canvas></div>
+  <div class="ip-name">Hi, I'm <span class="g">Darshak Alapati</span></div>
+  <div class="ip-line" id="introLine"><span class="cur"></span></div>
+  <button class="ip-skip" id="introSkip">Skip intro →</button>
+</div>
+
 <div id="progress"></div>
 <div class="aurora">
   <span class="blob b1"></span>
@@ -314,6 +359,20 @@
 <!-- ABOUT -->
 <section id="about">
   <div class="wrap">
+    <div class="aboutme reveal">
+      <div class="portrait-stage">
+        <div class="pglow"></div>
+        <canvas class="pcanvas" id="aboutPortrait"></canvas>
+        <div class="portrait-hint">move your cursor over me ✦</div>
+      </div>
+      <div class="am-copy">
+        <span class="kicker">Nice to meet you</span>
+        <h3>Hi, I'm <span class="g">Darshak</span>.</h3>
+        <p>I'm a data scientist and software engineer who genuinely enjoys the hard, invisible work that keeps businesses running — moving mission-critical data between systems and making sure every record can be trusted.</p>
+        <p>Over the last three years I've led large-scale migrations, automated the tedious work nobody wants to do by hand, and hunted down the root cause when things broke. Now I'm channeling a Master's in Data Science into analytics and machine learning — pairing engineering discipline with real statistical rigor.</p>
+        <p class="sign">— building things that quietly just work.</p>
+      </div>
+    </div>
     <div class="sec-head reveal">
       <span class="sec-tag">about</span>
       <h2>Engineering clarity out of messy data</h2>
@@ -652,32 +711,57 @@ type();
   camera.position.z=4.2;
 
   const group=new THREE.Group();scene.add(group);
-  // core icosahedron
-  const icoG=new THREE.IcosahedronGeometry(1.35,1);
-  const wire=new THREE.WireframeGeometry(icoG);
-  const wmat=new THREE.LineBasicMaterial({color:0x33e0ff,transparent:true,opacity:0.75});
-  group.add(new THREE.LineSegments(wire,wmat));
-  // inner solid glow sphere
-  const glowMat=new THREE.MeshBasicMaterial({color:0x6366f1,transparent:true,opacity:0.10});
-  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.0,32,32),glowMat));
-  // vertex points
-  const vmat=new THREE.PointsMaterial({color:0xa855f7,size:0.07});
-  group.add(new THREE.Points(icoG,vmat));
-  // orbiting ring
-  const ring=new THREE.Mesh(new THREE.TorusGeometry(1.9,0.012,8,120),new THREE.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:0.55}));
-  ring.rotation.x=Math.PI/2.3;scene.add(ring);
-  const ring2=new THREE.Mesh(new THREE.TorusGeometry(2.15,0.008,8,120),new THREE.MeshBasicMaterial({color:0x8b5cf6,transparent:true,opacity:0.4}));
-  ring2.rotation.x=Math.PI/1.7;ring2.rotation.y=Math.PI/4;scene.add(ring2);
+  const R=1.5;
+  // wireframe lat/long sphere
+  group.add(new THREE.LineSegments(new THREE.WireframeGeometry(new THREE.SphereGeometry(R,26,18)),
+    new THREE.LineBasicMaterial({color:0x6366f1,transparent:true,opacity:0.16})));
+  // inner shaded sphere for depth
+  group.add(new THREE.Mesh(new THREE.SphereGeometry(R*0.985,32,32),
+    new THREE.MeshBasicMaterial({color:0x180f3d,transparent:true,opacity:0.6})));
+  // glowing data points spread evenly over the surface (fibonacci sphere)
+  const NP=900;
+  const pos=new Float32Array(NP*3), gr=(Math.sqrt(5)-1)/2;
+  for(let i=0;i<NP;i++){
+    const y=1-(i/(NP-1))*2, rad=Math.sqrt(1-y*y), th=2*Math.PI*i*gr;
+    pos[i*3]=Math.cos(th)*rad*R; pos[i*3+1]=y*R; pos[i*3+2]=Math.sin(th)*rad*R;
+  }
+  const pgeo=new THREE.BufferGeometry(); pgeo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  group.add(new THREE.Points(pgeo,new THREE.PointsMaterial({color:0x35e0ff,size:0.045,transparent:true,opacity:0.95})));
+  // arcs connecting points, with travelling data pulses
+  const arcs=[];
+  function randSurf(){const u=Math.random(),v=Math.random(),th=2*Math.PI*u,ph=Math.acos(2*v-1);
+    return new THREE.Vector3(Math.sin(ph)*Math.cos(th),Math.cos(ph),Math.sin(ph)*Math.sin(th)).multiplyScalar(R);}
+  for(let k=0;k<7;k++){
+    const a=randSurf(),b=randSurf();
+    const mid=a.clone().add(b).multiplyScalar(0.5).normalize().multiplyScalar(R*(1.32+Math.random()*0.3));
+    const curve=new THREE.QuadraticBezierCurve3(a,mid,b);
+    group.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(curve.getPoints(44)),
+      new THREE.LineBasicMaterial({color:k%2?0x22d3ee:0xa855f7,transparent:true,opacity:0.5})));
+    const dg=new THREE.BufferGeometry(); dg.setAttribute('position',new THREE.BufferAttribute(new Float32Array(3),3));
+    const dot=new THREE.Points(dg,new THREE.PointsMaterial({color:0xffffff,size:0.1,transparent:true,opacity:0.95}));
+    group.add(dot); arcs.push({curve,dot,t:Math.random(),sp:0.003+Math.random()*0.004});
+  }
+  // thin orbiting ring
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(R*1.3,0.006,8,140),
+    new THREE.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:0.32}));
+  ring.rotation.x=Math.PI/2.1;scene.add(ring);
 
   let mx=0,my=0;
   parent.addEventListener('mousemove',e=>{const r=parent.getBoundingClientRect();mx=((e.clientX-r.left)/r.width-0.5)*2;my=((e.clientY-r.top)/r.height-0.5)*2;},{passive:true});
 
   function animate(){
     requestAnimationFrame(animate);
-    group.rotation.y+=0.004;group.rotation.x+=0.0016;
-    group.rotation.y+=(mx*0.5-group.rotation.y*0+0)*0; // keep smooth
-    group.rotation.x+=(my*0.0006);
-    ring.rotation.z+=0.006;ring2.rotation.z-=0.004;
+    group.rotation.y+=0.0034;
+    group.rotation.x+=((0.14+my*0.14)-group.rotation.x)*0.05;
+    ring.rotation.z+=0.004;
+    for(let i=0;i<arcs.length;i++){
+      const a=arcs[i]; a.t+=a.sp; if(a.t>1)a.t-=1;
+      const p=a.curve.getPoint(a.t);
+      a.dot.geometry.attributes.position.setXYZ(0,p.x,p.y,p.z);
+      a.dot.geometry.attributes.position.needsUpdate=true;
+    }
+    camera.position.x+=(mx*0.5-camera.position.x)*0.05;
+    camera.lookAt(0,0,0);
     renderer.render(scene,camera);
   }
   animate();
@@ -686,6 +770,100 @@ type();
     H=canvas.clientHeight||H;const w=canvas.clientWidth||W;
     camera.aspect=w/H;camera.updateProjectionMatrix();renderer.setSize(w,H,false);
   });
+})();
+
+/* ============ Interactive particle portrait ============ */
+const PORTRAIT_SRC='portrait.png';
+let _portraitImg=null, _portraitPromise=null;
+function loadPortrait(){
+  if(_portraitPromise)return _portraitPromise;
+  _portraitPromise=new Promise((res,rej)=>{
+    const img=new Image();
+    img.onload=()=>{_portraitImg=img;res(img);};
+    img.onerror=rej;
+    img.src=PORTRAIT_SRC;
+  });
+  return _portraitPromise;
+}
+function buildPortrait(canvas,opt){
+  opt=opt||{};
+  const density=opt.density||4;
+  loadPortrait().then(img=>{
+    const ow=img.width, oh=img.height;
+    const off=document.createElement('canvas');off.width=ow;off.height=oh;
+    const octx=off.getContext('2d');octx.drawImage(img,0,0);
+    let data;
+    try{ data=octx.getImageData(0,0,ow,oh).data; }catch(e){ return; }
+    const parts=[];
+    for(let y=0;y<oh;y+=density){
+      for(let x=0;x<ow;x+=density){
+        const i=(y*ow+x)*4, a=data[i+3];
+        if(a>70){
+          parts.push({tx:x,ty:y,
+            x:ow/2+(Math.random()-0.5)*ow*1.6, y:oh/2+(Math.random()-0.5)*oh*1.6,
+            r:data[i],g:data[i+1],b:data[i+2]});
+        }
+      }
+    }
+    const ctx=canvas.getContext('2d');
+    const DPR=Math.min(window.devicePixelRatio||1,2);
+    function resize(){const rect=canvas.getBoundingClientRect();canvas.width=Math.max(1,rect.width*DPR);canvas.height=Math.max(1,rect.height*DPR);}
+    resize();window.addEventListener('resize',resize);
+    const mouse={x:-9999,y:-9999};
+    canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mouse.x=(e.clientX-r.left)/r.width*ow;mouse.y=(e.clientY-r.top)/r.height*oh;},{passive:true});
+    canvas.addEventListener('pointerleave',()=>{mouse.x=-9999;mouse.y=-9999;});
+    const dotBase=density*0.52;
+    function frame(){
+      const sw=canvas.width/ow, sh=canvas.height/oh;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(let k=0;k<parts.length;k++){
+        const p=parts[k];
+        p.x+=(p.tx-p.x)*0.07; p.y+=(p.ty-p.y)*0.07;
+        let ox=0,oy=0;
+        const dx=p.x-mouse.x, dy=p.y-mouse.y, d2=dx*dx+dy*dy;
+        if(d2<1100){const d=Math.sqrt(d2)||1;const f=(34-d)/34*13;if(f>0){ox=dx/d*f;oy=dy/d*f;}}
+        ctx.fillStyle='rgb('+p.r+','+p.g+','+p.b+')';
+        const px=(p.x+ox)*sw, py=(p.y+oy)*sh, s=dotBase*sw;
+        ctx.fillRect(px,py,s,s);
+      }
+      requestAnimationFrame(frame);
+    }
+    frame();
+  });
+}
+if(document.getElementById('aboutPortrait')) buildPortrait(document.getElementById('aboutPortrait'),{density:4});
+
+/* ============ Cinematic intro overlay ============ */
+(function(){
+  const intro=document.getElementById('intro');
+  if(!intro)return;
+  let seen=false; try{ seen=sessionStorage.getItem('da_intro')==='1'; }catch(e){}
+  if(seen){ intro.parentNode&&intro.parentNode.removeChild(intro); return; }
+  document.body.style.overflow='hidden';
+  buildPortrait(document.getElementById('introPortrait'),{density:3});
+  const lineEl=document.getElementById('introLine');
+  const phrases=['Data Scientist & Software Engineer','I turn complex data into reliable systems.'];
+  let pi=0,ci=0,del=false;
+  function type(){
+    if(dismissed)return;
+    const w=phrases[pi];
+    lineEl.innerHTML=(del?w.slice(0,ci--):w.slice(0,ci++))+'<span class="cur"></span>';
+    let d=del?28:58;
+    if(!del&&ci===w.length+1){ if(pi===phrases.length-1){return;} del=true; d=1100; }
+    else if(del&&ci<0){ del=false;ci=0;pi++; d=200; }
+    setTimeout(type,d);
+  }
+  setTimeout(type,1100);
+  let dismissed=false;
+  function done(){
+    if(dismissed)return;dismissed=true;
+    try{ sessionStorage.setItem('da_intro','1'); }catch(e){}
+    intro.classList.add('hide');
+    document.body.style.overflow='';
+    setTimeout(()=>{intro.parentNode&&intro.parentNode.removeChild(intro);},1100);
+  }
+  document.getElementById('introSkip').addEventListener('click',done);
+  setTimeout(done,6400);
 })();
 
 /* ============ 3D tilt on cards ============ */
