@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Darshak Alapati — Data Scientist &amp; Software Engineer</title>
+<meta name="description" content="Portfolio of Darshak Alapati — Data Scientist and Software Engineering Analyst specializing in data migration, workflow automation, and analytics." />
+<meta name="author" content="Darshak Alapati" />
+<link rel="canonical" href="https://darshakalapati.com/" />
+<!-- Open Graph -->
+<meta property="og:title" content="Darshak Alapati — Data Scientist & Software Engineer" />
+<meta property="og:description" content="3 years of experience in data migration, automation, and analytics. Master's in Data Science." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://darshakalapati.com/" />
+<meta property="og:site_name" content="Darshak Alapati" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Darshak Alapati — Data Scientist & Software Engineer" />
+<meta name="twitter:description" content="3 years of experience in data migration, automation, and analytics. Master's in Data Science." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --bg:#05070d;
+    --bg-2:#0a0e18;
+    --panel:rgba(16,22,38,0.55);
+    --panel-solid:#101626;
+    --stroke:rgba(120,150,220,0.14);
+    --stroke-strong:rgba(120,170,255,0.35);
+    --text:#e8ecf6;
+    --muted:#98a3bd;
+    --dim:#5f6c86;
+    --cyan:#22d3ee;
+    --violet:#8b5cf6;
+    --blue:#3b82f6;
+    --grad:linear-gradient(120deg,#22d3ee 0%,#6366f1 50%,#a855f7 100%);
+    --glow:0 0 40px rgba(80,120,255,0.25);
+    --radius:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-0.02em;line-height:1.08}
+  .mono{font-family:'JetBrains Mono',monospace}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:rgba(139,92,246,0.4);color:#fff}
+
+  /* Fixed 3D canvas background */
+  #bg-canvas{position:fixed;inset:0;z-index:0;pointer-events:none}
+  .bg-tint{position:fixed;inset:0;z-index:1;pointer-events:none;
+    background:radial-gradient(1000px 700px at 78% -5%,rgba(99,102,241,0.16),transparent 60%),
+               radial-gradient(900px 600px at 5% 20%,rgba(34,211,238,0.10),transparent 55%),
+               linear-gradient(180deg,rgba(5,7,13,0) 0%,rgba(5,7,13,0.35) 70%,rgba(5,7,13,0.9) 100%);}
+  .content{position:relative;z-index:2}
+
+  /* NAV */
+  nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
+    padding:18px clamp(20px,5vw,64px);transition:.35s;backdrop-filter:blur(0px)}
+  nav.scrolled{background:rgba(6,9,16,0.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--stroke);padding-top:14px;padding-bottom:14px}
+  .brand{font-family:'Space Grotesk';font-weight:700;font-size:1.15rem;display:flex;align-items:center;gap:10px}
+  .brand .dot{width:11px;height:11px;border-radius:50%;background:var(--grad);box-shadow:0 0 14px var(--cyan)}
+  .nav-links{display:flex;gap:6px;align-items:center}
+  .nav-links a{padding:8px 14px;border-radius:10px;font-size:.9rem;color:var(--muted);transition:.25s}
+  .nav-links a:hover{color:var(--text);background:rgba(255,255,255,0.05)}
+  .nav-cta{border:1px solid var(--stroke-strong)!important;color:var(--text)!important}
+  .nav-cta:hover{background:var(--grad)!important;color:#05070d!important;font-weight:600}
+  .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
+  .burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.3s}
+
+  /* container */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(20px,5vw,48px)}
+  section{padding:clamp(80px,11vh,130px) 0;position:relative}
+
+  /* HERO */
+  #hero{min-height:100vh;display:flex;align-items:center;padding-top:90px}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:40px;align-items:center;width:100%}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--cyan);border:1px solid var(--stroke);padding:7px 15px;border-radius:100px;background:var(--panel);margin-bottom:26px}
+  .eyebrow .pulse{width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 0 0 rgba(52,211,153,.6);animation:pulse 2s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(52,211,153,.5)}70%{box-shadow:0 0 0 10px rgba(52,211,153,0)}100%{box-shadow:0 0 0 0 rgba(52,211,153,0)}}
+  #hero h1{font-size:clamp(2.6rem,6.4vw,5rem);font-weight:700;margin-bottom:20px}
+  #hero h1 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-role{font-size:clamp(1.05rem,2.3vw,1.45rem);color:var(--muted);font-weight:400;margin-bottom:26px;min-height:1.6em}
+  .hero-role .tw{color:var(--text);font-weight:500}
+  .cursor{display:inline-block;width:2px;height:1.1em;background:var(--cyan);margin-left:2px;vertical-align:-2px;animation:blink 1s steps(2) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .hero-desc{color:var(--muted);max-width:560px;font-size:1.02rem;margin-bottom:34px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:38px}
+  .btn{padding:13px 26px;border-radius:12px;font-weight:600;font-size:.95rem;cursor:pointer;transition:.28s;border:1px solid transparent;display:inline-flex;align-items:center;gap:9px}
+  .btn-primary{background:var(--grad);color:#05070d;box-shadow:var(--glow)}
+  .btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(99,102,241,0.45)}
+  .btn-ghost{border-color:var(--stroke-strong);color:var(--text);background:var(--panel)}
+  .btn-ghost:hover{border-color:var(--cyan);transform:translateY(-3px)}
+  .hero-stats{display:flex;gap:34px;flex-wrap:wrap}
+  .hero-stats .s{display:flex;flex-direction:column}
+  .hero-stats .n{font-family:'Space Grotesk';font-size:1.9rem;font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .hero-stats .l{font-size:.8rem;color:var(--dim);text-transform:uppercase;letter-spacing:.08em}
+
+  /* Hero 3D card / avatar orb */
+  .orb-wrap{position:relative;display:flex;justify-content:center;align-items:center;min-height:360px}
+  #orb-canvas{width:100%;height:420px;max-width:420px}
+  .orb-badge{position:absolute;background:var(--panel);border:1px solid var(--stroke);backdrop-filter:blur(10px);
+    border-radius:14px;padding:11px 15px;font-size:.82rem;display:flex;align-items:center;gap:9px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .orb-badge .mono{color:var(--cyan)}
+  .b1{top:8%;left:-2%;animation:float1 6s ease-in-out infinite}
+  .b2{bottom:14%;right:-4%;animation:float2 7s ease-in-out infinite}
+  .b3{bottom:2%;left:8%;animation:float1 8s ease-in-out infinite}
+  @keyframes float1{50%{transform:translateY(-16px)}}
+  @keyframes float2{50%{transform:translateY(14px)}}
+
+  /* SECTION HEADINGS */
+  .sec-head{margin-bottom:54px;max-width:680px}
+  .sec-tag{font-family:'JetBrains Mono';font-size:.82rem;color:var(--cyan);letter-spacing:.05em;margin-bottom:14px;display:block}
+  .sec-tag::before{content:'// '}
+  .sec-head h2{font-size:clamp(2rem,4.4vw,3.1rem);font-weight:700;margin-bottom:16px}
+  .sec-head p{color:var(--muted);font-size:1.05rem}
+
+  /* glass card base */
+  .card{background:var(--panel);border:1px solid var(--stroke);border-radius:var(--radius);backdrop-filter:blur(12px);
+    position:relative;overflow:hidden;transition:transform .3s cubic-bezier(.2,.8,.2,1),border-color .3s,box-shadow .3s}
+  .card::after{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;
+    background:linear-gradient(140deg,rgba(120,170,255,0.35),transparent 40%);
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;
+    opacity:0;transition:.35s;pointer-events:none}
+  .card:hover::after{opacity:1}
+  .card:hover{border-color:var(--stroke-strong);box-shadow:0 18px 50px rgba(0,0,0,.5)}
+
+  /* ABOUT */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:34px;align-items:start}
+  .about-text p{color:var(--muted);margin-bottom:18px;font-size:1.04rem}
+  .about-text strong{color:var(--text);font-weight:600}
+  .highlight-list{display:grid;gap:14px;margin-top:8px}
+  .hl{display:flex;gap:14px;padding:16px;border-radius:14px;background:rgba(255,255,255,0.02);border:1px solid var(--stroke)}
+  .hl .ic{font-size:1.4rem;flex-shrink:0}
+  .hl h4{font-size:.98rem;font-weight:600;margin-bottom:3px}
+  .hl p{font-size:.86rem;color:var(--muted);margin:0}
+
+  /* SKILLS */
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
+  .skill-cat{padding:26px}
+  .skill-cat .ch{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+  .skill-cat .ch .ic{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:1.25rem;
+    background:linear-gradient(140deg,rgba(34,211,238,.16),rgba(139,92,246,.16));border:1px solid var(--stroke)}
+  .skill-cat h3{font-size:1.08rem;font-weight:600}
+  .chips{display:flex;flex-wrap:wrap;gap:9px}
+  .chip{font-family:'JetBrains Mono';font-size:.8rem;padding:7px 13px;border-radius:9px;background:rgba(255,255,255,0.03);
+    border:1px solid var(--stroke);color:var(--muted);transition:.25s;cursor:default}
+  .chip:hover{color:var(--text);border-color:var(--cyan);background:rgba(34,211,238,.08);transform:translateY(-2px)}
+
+  /* EXPERIENCE timeline */
+  .timeline{position:relative;padding-left:38px}
+  .timeline::before{content:'';position:absolute;left:10px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--cyan),var(--violet),transparent)}
+  .tl-item{position:relative;margin-bottom:30px}
+  .tl-item::before{content:'';position:absolute;left:-33px;top:26px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--cyan);box-shadow:0 0 0 4px rgba(34,211,238,.12)}
+  .tl-card{padding:26px 28px}
+  .tl-top{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:baseline;margin-bottom:6px}
+  .tl-role{font-size:1.2rem;font-weight:600;font-family:'Space Grotesk'}
+  .tl-date{font-family:'JetBrains Mono';font-size:.8rem;color:var(--cyan);white-space:nowrap;border:1px solid var(--stroke);padding:5px 11px;border-radius:8px;background:var(--panel)}
+  .tl-co{color:var(--muted);font-size:.95rem;margin-bottom:16px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .tl-co .loc{color:var(--dim);font-size:.85rem}
+  .tl-card ul{list-style:none;display:grid;gap:9px}
+  .tl-card li{position:relative;padding-left:22px;color:var(--muted);font-size:.94rem}
+  .tl-card li::before{content:'▹';position:absolute;left:0;color:var(--cyan)}
+
+  /* PROJECTS */
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}
+  .proj{padding:30px;display:flex;flex-direction:column}
+  .proj .pnum{font-family:'JetBrains Mono';font-size:.8rem;color:var(--dim);margin-bottom:16px}
+  .proj h3{font-size:1.35rem;font-weight:600;margin-bottom:12px}
+  .proj .pdesc{color:var(--muted);font-size:.95rem;margin-bottom:18px}
+  .proj ul{list-style:none;display:grid;gap:8px;margin-bottom:20px}
+  .proj li{position:relative;padding-left:20px;color:var(--muted);font-size:.9rem}
+  .proj li::before{content:'→';position:absolute;left:0;color:var(--violet)}
+  .proj .ptags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+
+  /* EDU + CERTS */
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
+  .edu-item{padding:24px 26px;margin-bottom:18px}
+  .edu-item .et{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+  .edu-item h3{font-size:1.12rem;font-weight:600}
+  .edu-item .deg{color:var(--cyan);font-size:.95rem;margin:4px 0 10px}
+  .edu-item .edate{font-family:'JetBrains Mono';font-size:.78rem;color:var(--dim);white-space:nowrap}
+  .edu-item p{color:var(--muted);font-size:.88rem}
+  .cert-list{display:grid;gap:12px}
+  .cert{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:13px;background:var(--panel);border:1px solid var(--stroke);transition:.25s}
+  .cert:hover{border-color:var(--stroke-strong);transform:translateX(5px)}
+  .cert .ci{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex-shrink:0;font-size:1.1rem;
+    background:linear-gradient(140deg,rgba(139,92,246,.18),rgba(59,130,246,.18));border:1px solid var(--stroke)}
+  .cert h4{font-size:.95rem;font-weight:500}
+  .cert .cmeta{font-size:.78rem;color:var(--dim)}
+
+  /* CONTACT */
+  #contact{text-align:center}
+  .contact-card{padding:clamp(40px,7vw,72px);text-align:center;position:relative}
+  #contact h2{font-size:clamp(2rem,5vw,3.4rem);margin-bottom:18px}
+  #contact h2 .g{background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  #contact p{color:var(--muted);max-width:520px;margin:0 auto 34px;font-size:1.06rem}
+  .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+  .cbtn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;border:1px solid var(--stroke);
+    background:var(--panel);transition:.28s;font-weight:500;font-size:.95rem}
+  .cbtn:hover{border-color:var(--cyan);transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.4)}
+  .cbtn.prim{background:var(--grad);color:#05070d;border-color:transparent;font-weight:600}
+
+  footer{padding:40px 0 50px;text-align:center;color:var(--dim);font-size:.85rem;border-top:1px solid var(--stroke);margin-top:40px}
+  footer .fbrand{color:var(--muted);font-family:'Space Grotesk';font-weight:600}
+
+  /* reveal animation */
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .7s cubic-bezier(.2,.8,.2,1),transform .7s cubic-bezier(.2,.8,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* scroll progress */
+  #progress{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:60;box-shadow:0 0 12px var(--cyan)}
+
+  /* RESPONSIVE */
+  @media(max-width:900px){
+    .hero-grid{grid-template-columns:1fr;gap:10px}
+    .orb-wrap{min-height:300px;order:-1}
+    #orb-canvas{height:300px}
+    .about-grid,.two-col{grid-template-columns:1fr}
+    .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);flex-direction:column;justify-content:center;
+      background:rgba(8,11,20,0.97);backdrop-filter:blur(18px);gap:6px;transform:translateX(100%);transition:.4s;border-left:1px solid var(--stroke);padding:40px}
+    .nav-links.open{transform:none}
+    .nav-links a{width:100%;text-align:center;padding:14px;font-size:1.05rem}
+    .burger{display:flex;z-index:60}
+    .burger.x span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .burger.x span:nth-child(2){opacity:0}
+    .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+  }
+  @media(max-width:560px){
+    .hero-stats{gap:22px}
+    .orb-badge{font-size:.72rem;padding:8px 11px}
+    .b1{left:0}.b2{right:0}
+  }
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div id="progress"></div>
+<canvas id="bg-canvas"></canvas>
+<div class="bg-tint"></div>
+
+<nav id="nav">
+  <a href="#hero" class="brand"><span class="dot"></span>Darshak&nbsp;Alapati</a>
+  <div class="nav-links" id="navlinks">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#education">Education</a>
+    <a href="#contact" class="nav-cta">Get in touch</a>
+  </div>
+  <div class="burger" id="burger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="content">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <span class="eyebrow"><span class="pulse"></span>Available for Data Science &amp; Engineering roles</span>
+        <h1>Turning <span class="g">complex data</span><br/>into reliable systems.</h1>
+        <p class="hero-role"><span class="tw" id="typed"></span><span class="cursor"></span></p>
+        <p class="hero-desc">For the past three years I've helped enterprises move mission-critical data between systems without losing a single record — automating the tedious parts, hardening the pipelines, and making sure the numbers people rely on are actually correct. Now, with a Master's in Data Science, I bring that same rigor to analytics and machine learning.</p>
+        <div class="hero-cta">
+          <a href="#projects" class="btn btn-primary">View my work →</a>
+          <a href="#contact" class="btn btn-ghost">Contact me</a>
+        </div>
+        <div class="hero-stats">
+          <div class="s"><span class="n">3+</span><span class="l">Years experience</span></div>
+          <div class="s"><span class="n">2</span><span class="l">Degrees</span></div>
+          <div class="s"><span class="n">5</span><span class="l">Certifications</span></div>
+          <div class="s"><span class="n">15+</span><span class="l">Tools &amp; tech</span></div>
+        </div>
+      </div>
+      <div class="orb-wrap">
+        <canvas id="orb-canvas"></canvas>
+        <div class="orb-badge b1"><span class="mono">&lt;/&gt;</span> Shell &amp; Python</div>
+        <div class="orb-badge b2"><span class="mono">◆</span> SQL · Control-M</div>
+        <div class="orb-badge b3"><span class="mono">▤</span> Power BI · AWS</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">about</span>
+      <h2>Engineering clarity out of messy data</h2>
+      <p>I specialize in the unglamorous, mission-critical work that keeps enterprises running: moving data safely between systems and making it dependable.</p>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>My career has been built around one deceptively hard problem: <strong>getting data from where it is to where it needs to be, intact.</strong> Over three years I've designed database structures from the ground up, lifted enormous datasets off aging legacy platforms, and shepherded them into modern systems while guarding every record's integrity, accuracy, and security along the way.</p>
+        <p>A lot of that reliability comes from automation. I lean heavily on <strong>Shell scripting</strong> to take slow, repetitive, error-prone tasks and turn them into repeatable processes that run themselves — and on tools like <strong>SQL, Control-M, and SAP</strong> to watch pipelines closely, catch failures early, and keep throughput high. When something breaks, I trace it back to the real cause rather than patching the symptom.</p>
+        <p>What ties it together is a genuinely analytical way of thinking. I notice where processes leak time, where data quietly drifts out of sync, and where a small change compounds into a big efficiency win. Finishing a <strong>Master's in Data Science at Wichita State University</strong> has extended that instinct into machine learning, statistical analysis, and data storytelling — so I can speak fluently to both the engineers who build the pipelines and the stakeholders who act on the results.</p>
+      </div>
+      <div class="highlight-list reveal">
+        <div class="hl card"><span class="ic">🔄</span><div><h4>Data Migration</h4><p>Moving data off legacy platforms and proving, row by row, that nothing was lost or altered.</p></div></div>
+        <div class="hl card"><span class="ic">⚙️</span><div><h4>Workflow Automation</h4><p>Replacing manual, repetitive work with scripts and bots that run reliably on their own.</p></div></div>
+        <div class="hl card"><span class="ic">📊</span><div><h4>Analytics &amp; ML</h4><p>Exploring data, testing hypotheses, and building models that turn numbers into decisions.</p></div></div>
+        <div class="hl card"><span class="ic">🤝</span><div><h4>Collaboration</h4><p>Translating between technical and business teams to keep complex projects on track.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">skills &amp; tools</span>
+      <h2>The stack I build with</h2>
+      <p>A blend of engineering, data, and enterprise automation tooling.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-cat card reveal"><div class="ch"><span class="ic">💻</span><h3>Programming &amp; Scripting</h3></div>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">Shell Scripting</span><span class="chip">HTML</span></div></div>
+      <div class="skill-cat card reveal"><div class="ch"><span class="ic">📈</span><h3>Data &amp; Analytics</h3></div>
+        <div class="chips"><span class="chip">EDA</span><span class="chip">Data Engineering</span><span class="chip">Machine Learning</span><span class="chip">Predictive Analytics</span><span class="chip">Statistical Analysis</span><span class="chip">Data-Driven Decisions</span></div></div>
+      <div class="skill-cat card reveal"><div class="ch"><span class="ic">📊</span><h3>Visualization &amp; Reporting</h3></div>
+        <div class="chips"><span class="chip">Power BI</span><span class="chip">Microsoft Excel</span></div></div>
+      <div class="skill-cat card reveal"><div class="ch"><span class="ic">☁️</span><h3>Cloud, DevOps &amp; Scheduling</h3></div>
+        <div class="chips"><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Control-M</span></div></div>
+      <div class="skill-cat card reveal"><div class="ch"><span class="ic">🤖</span><h3>Automation &amp; Enterprise</h3></div>
+        <div class="chips"><span class="chip">UiPath</span><span class="chip">Automation Anywhere</span><span class="chip">SAP</span><span class="chip">ALM</span></div></div>
+      <div class="skill-cat card reveal"><div class="ch"><span class="ic">🧩</span><h3>Core Concepts</h3></div>
+        <div class="chips"><span class="chip">Data Structures &amp; Algorithms</span><span class="chip">Debugging</span><span class="chip">Model Deployment</span><span class="chip">Data Modeling</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">experience</span>
+      <h2>Where I've made an impact</h2>
+      <p>Enterprise-scale engineering across migration, automation, and operations.</p>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item reveal"><div class="tl-card card">
+        <div class="tl-top"><span class="tl-role">Custom Software Engineering Analyst</span><span class="tl-date">Nov 2023 — Jan 2024</span></div>
+        <div class="tl-co">Accenture Solutions Pvt. Ltd. · <em>Bath &amp; Body Works Migration</em> <span class="loc">📍 Hyderabad, India</span></div>
+        <ul>
+          <li>Owned the day-to-day health of enterprise-scale batch pipelines, orchestrating hundreds of scheduled jobs through Control-M and stepping in the moment anything drifted off course.</li>
+          <li>Rewrote and tuned Shell scripts to shave latency out of the nightly batch window, letting more work finish inside tighter processing timeframes.</li>
+          <li>Mapped out job schedules, upstream/downstream dependencies, and automated recovery paths so a single failure couldn't cascade across the pipeline.</li>
+          <li>Turned raw batch metrics into early-warning signals, then chased failures to their root cause instead of restarting jobs blindly.</li>
+          <li>Tailored migration logic to each client scenario, balancing what the technical spec demanded against what the business actually needed.</li>
+          <li>Partnered daily with cross-functional teams and left behind clear runbooks so the next engineer could operate the system without me in the room.</li>
+          <li>Championed small process improvements that compounded into measurably steadier, more predictable overnight runs.</li>
+        </ul>
+      </div></div>
+
+      <div class="tl-item reveal"><div class="tl-card card">
+        <div class="tl-top"><span class="tl-role">Custom Software Engineering Associate</span><span class="tl-date">Oct 2022 — Oct 2023</span></div>
+        <div class="tl-co">Accenture Solutions Pvt. Ltd. · <em>Bath &amp; Body Works Migration</em> <span class="loc">📍 Hyderabad, India</span></div>
+        <ul>
+          <li>Built the end-to-end Shell and Linux tooling that carried large volumes of data off legacy databases and into their modern replacements.</li>
+          <li>Wrote SQL validation routines that compared source and target side by side, catching mismatches before they ever reached production.</li>
+          <li>Automated the recurring, hand-run steps of the migration so the process became faster, repeatable, and far less prone to human error.</li>
+          <li>Investigated data that didn't reconcile during verification, tracing anomalies back through the pipeline until the numbers lined up exactly.</li>
+          <li>Ran Java transformation logic inside Docker containers and kept those services healthy so processing stayed stable under load.</li>
+          <li>Produced status, performance, and audit reports that gave stakeholders a clear, trustworthy view of migration progress.</li>
+          <li>Held the work to strict data-security, compliance, and access-control standards from first extract to final cutover.</li>
+        </ul>
+      </div></div>
+
+      <div class="tl-item reveal"><div class="tl-card card">
+        <div class="tl-top"><span class="tl-role">Application Development Associate</span><span class="tl-date">Oct 2021 — Oct 2022</span></div>
+        <div class="tl-co">Accenture Solutions Pvt. Ltd. · <em>Accenture Internal</em> <span class="loc">📍 Hyderabad, India</span></div>
+        <ul>
+          <li>Cut my teeth on enterprise application development, getting hands-on with the frameworks and tooling that would anchor the rest of my career.</li>
+          <li>Dug into application and operational data to surface trends and performance signals leadership could act on.</li>
+          <li>Distilled that analysis into clear status and insight reports that fed directly into management decisions.</li>
+          <li>Kept projects grounded with data-driven documentation that made planning and execution smoother for the whole team.</li>
+        </ul>
+      </div></div>
+
+      <div class="tl-item reveal"><div class="tl-card card">
+        <div class="tl-top"><span class="tl-role">Operations Executive</span><span class="tl-date">Mar 2021 — Sep 2021</span></div>
+        <div class="tl-co">EDU-Tech (Skill Vertex) <span class="loc">📍 Bengaluru, India</span></div>
+        <ul>
+          <li>Ran the operational side of the Learning Management System, keeping platform data clean and dependable for everyone who relied on it.</li>
+          <li>Modeled learner engagement and performance data to understand what was actually driving outcomes.</li>
+          <li>Kept a close eye on budgets and expenses, turning the numbers into detailed financial reports for leadership.</li>
+          <li>Gave senior management a reliable reporting layer they could plan and make decisions against.</li>
+        </ul>
+      </div></div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">projects</span>
+      <h2>Selected data work</h2>
+      <p>A couple of projects that show how I approach a dataset — from cleaning and questioning it to turning it into something a decision-maker can use.</p>
+    </div>
+    <div class="proj-grid">
+
+      <div class="proj card reveal">
+        <span class="pnum">Project 01 · Research</span>
+        <h3>Education Pathways &amp; Earnings Study</h3>
+        <p class="pdesc">A question worth answering: do students who start at a community college end up earning less than those who begin at a four-year university? I set out to measure it using years of national survey data, for a Kansas Board of Regents research initiative.</p>
+        <ul>
+          <li>Framed the problem around wages, job type, and employment status, so the comparison reflected real career outcomes rather than headline averages.</li>
+          <li>Stitched together six survey years into one coherent dataset — reconciling schemas that changed over time, handling missing values, and dropping variables too sparse to trust.</li>
+          <li>Tamed the salary data by trimming implausible entries and winsorizing extremes, so a handful of outliers couldn't skew the whole story.</li>
+          <li>Adjusted earnings for inflation and charted distributions over time to see how the gap actually moved, not just where it landed.</li>
+          <li>Backed the findings with formal hypothesis testing and regression summaries, so every claim rested on statistical evidence.</li>
+          <li>Packaged the results into Power BI visuals that made a dense academic question legible at a glance.</li>
+        </ul>
+        <div class="ptags"><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Statistics</span><span class="chip">EDA</span><span class="chip">Regression</span></div>
+      </div>
+
+      <div class="proj card reveal">
+        <span class="pnum">Project 02 · Analytics</span>
+        <h3>Reading the Airbnb Market — NYC</h3>
+        <p class="pdesc">New York's short-term rental market is huge, noisy, and full of hidden structure. I treated a large Airbnb listings dataset less like a spreadsheet and more like a story waiting to be told — and told it two different ways for two different audiences.</p>
+        <ul>
+          <li>Explored pricing, location, availability, and review patterns to find where the real opportunities and risks were hiding in the data.</li>
+          <li>Focused on the "so what" — translating correlations and clusters into plain-language takeaways a non-technical reader could act on.</li>
+          <li>Built two tailored narratives from the same analysis: a technical walkthrough for analytics leadership, and an outcome-focused version for operations and user-experience teams.</li>
+          <li>Framed each insight around a decision, so the work pointed toward action instead of just describing the past.</li>
+          <li>Used a mix of Excel, Python, and Power BI to keep the exploration fast and the final visuals clean.</li>
+        </ul>
+        <div class="ptags"><span class="chip">Excel</span><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Data Storytelling</span><span class="chip">EDA</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION + CERTS -->
+<section id="education">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag">education &amp; credentials</span>
+      <h2>Foundations &amp; certifications</h2>
+    </div>
+    <div class="two-col">
+      <div class="reveal">
+        <div class="edu-item card">
+          <div class="et"><h3>Wichita State University</h3><span class="edate">Jan 2024 — Dec 2025</span></div>
+          <div class="deg">Master's, Data Science</div>
+          <p>Python · Machine Learning · EDA · SQL · Data Analysis · Model Deployment · AWS · Advanced Data Storage · Power BI</p>
+        </div>
+        <div class="edu-item card">
+          <div class="et"><h3>Lovely Professional University</h3><span class="edate">Aug 2017 — Aug 2021</span></div>
+          <div class="deg">Bachelor's, Electronics &amp; Communications</div>
+          <p>Engineering fundamentals, systems, and problem-solving that underpin my data work.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="cert-list">
+          <div class="cert"><span class="ci">📊</span><div><h4>Microsoft Power BI</h4><span class="cmeta">LinkedIn Learning · Mar 2025</span></div></div>
+          <div class="cert"><span class="ci">🐍</span><div><h4>Data Ingestion with Python</h4><span class="cmeta">LinkedIn Learning · Jan 2025</span></div></div>
+          <div class="cert"><span class="ci">📈</span><div><h4>Learning Data Visualization</h4><span class="cmeta">LinkedIn Learning · Feb 2025</span></div></div>
+          <div class="cert"><span class="ci">🤖</span><div><h4>Robotic Process Automation</h4><span class="cmeta">UiPath · Nov 2023</span></div></div>
+          <div class="cert"><span class="ci">🔐</span><div><h4>Cybersecurity Compliance &amp; Frameworks</h4><span class="cmeta">IBM · Coursera · Nov 2020</span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-card card reveal">
+      <span class="sec-tag" style="justify-content:center">get in touch</span>
+      <h2>Let's build something <span class="g">data-driven</span>.</h2>
+      <p>Open to Data Science, Data Engineering, and Analytics roles. I'd love to hear about your team and the problems you're solving.</p>
+      <div class="contact-links">
+        <a href="mailto:iamdarshak12@gmail.com" class="cbtn prim">✉️ Email me</a>
+        <a href="https://linkedin.com/in/alapatidarshak" target="_blank" rel="noopener" class="cbtn">in LinkedIn</a>
+        <a href="tel:+13312290525" class="cbtn">📞 (331) 229-0525</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><span class="fbrand">Darshak Alapati</span> · Wichita, KS · Data Scientist &amp; Software Engineer</p>
+  <p style="margin-top:8px">Built with three.js · Designed for the web</p>
+</footer>
+
+</div><!-- /content -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============ Nav / scroll / progress ============ */
+const nav=document.getElementById('nav');
+const progress=document.getElementById('progress');
+const burger=document.getElementById('burger');
+const navlinks=document.getElementById('navlinks');
+function onScroll(){
+  const y=window.scrollY;
+  nav.classList.toggle('scrolled',y>40);
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  progress.style.width=(h>0?(y/h)*100:0)+'%';
+}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+burger.addEventListener('click',()=>{navlinks.classList.toggle('open');burger.classList.toggle('x');});
+navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navlinks.classList.remove('open');burger.classList.remove('x');}));
+
+/* ============ Reveal on scroll ============ */
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+/* ============ Typing effect ============ */
+const roles=['Data Scientist','Software Engineering Analyst','Data Migration Specialist','Automation Engineer','Analytics & ML Enthusiast'];
+const typed=document.getElementById('typed');
+let ri=0,ci=0,del=false;
+function type(){
+  const w=roles[ri];
+  typed.textContent=del?w.slice(0,ci--):w.slice(0,ci++);
+  let d=del?45:90;
+  if(!del&&ci===w.length+1){del=true;d=1400;}
+  else if(del&&ci<0){del=false;ci=0;ri=(ri+1)%roles.length;d=250;}
+  setTimeout(type,d);
+}
+type();
+
+/* ============ Background 3D — floating data network ============ */
+(function(){
+  const canvas=document.getElementById('bg-canvas');
+  if(!window.THREE)return;
+  const reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio=Math.min(window.devicePixelRatio,2);
+  renderer.setSize(window.innerWidth,window.innerHeight);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(60,window.innerWidth/window.innerHeight,0.1,1000);
+  camera.position.z=60;
+
+  // particles
+  const COUNT=window.innerWidth<600?90:170;
+  const geo=new THREE.BufferGeometry();
+  const pos=new Float32Array(COUNT*3);
+  const vel=[];
+  const SPREAD=110;
+  for(let i=0;i<COUNT;i++){
+    pos[i*3]=(Math.random()-0.5)*SPREAD;
+    pos[i*3+1]=(Math.random()-0.5)*SPREAD*0.62;
+    pos[i*3+2]=(Math.random()-0.5)*60;
+    vel.push({x:(Math.random()-0.5)*0.05,y:(Math.random()-0.5)*0.05,z:(Math.random()-0.5)*0.05});
+  }
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const dot=new THREE.PointsMaterial({color:0x66d9ff,size:0.9,transparent:true,opacity:0.85,blending:THREE.AdditiveBlending});
+  const points=new THREE.Points(geo,dot);
+  scene.add(points);
+
+  // connecting lines
+  const lineGeo=new THREE.BufferGeometry();
+  const MAXL=COUNT*6;
+  const linePos=new Float32Array(MAXL*3);
+  lineGeo.setAttribute('position',new THREE.BufferAttribute(linePos,3));
+  const lineMat=new THREE.LineBasicMaterial({color:0x6d7cff,transparent:true,opacity:0.16,blending:THREE.AdditiveBlending});
+  const lines=new THREE.LineSegments(lineGeo,lineMat);
+  scene.add(lines);
+
+  const DIST=17;
+  let mouseX=0,mouseY=0;
+  window.addEventListener('mousemove',e=>{mouseX=(e.clientX/window.innerWidth-0.5);mouseY=(e.clientY/window.innerHeight-0.5);},{passive:true});
+
+  function animate(){
+    requestAnimationFrame(animate);
+    const p=geo.attributes.position.array;
+    for(let i=0;i<COUNT;i++){
+      p[i*3]+=vel[i].x;p[i*3+1]+=vel[i].y;p[i*3+2]+=vel[i].z;
+      if(Math.abs(p[i*3])>SPREAD/2)vel[i].x*=-1;
+      if(Math.abs(p[i*3+1])>SPREAD*0.31)vel[i].y*=-1;
+      if(Math.abs(p[i*3+2])>30)vel[i].z*=-1;
+    }
+    geo.attributes.position.needsUpdate=true;
+    // rebuild lines
+    let li=0;
+    for(let i=0;i<COUNT;i++){
+      for(let j=i+1;j<COUNT;j++){
+        const dx=p[i*3]-p[j*3],dy=p[i*3+1]-p[j*3+1],dz=p[i*3+2]-p[j*3+2];
+        const d=Math.sqrt(dx*dx+dy*dy+dz*dz);
+        if(d<DIST&&li<MAXL-2){
+          linePos[li*3]=p[i*3];linePos[li*3+1]=p[i*3+1];linePos[li*3+2]=p[i*3+2];li++;
+          linePos[li*3]=p[j*3];linePos[li*3+1]=p[j*3+1];linePos[li*3+2]=p[j*3+2];li++;
+        }
+      }
+    }
+    lineGeo.setDrawRange(0,li);
+    lineGeo.attributes.position.needsUpdate=true;
+    points.rotation.y+=0.0004;lines.rotation.y+=0.0004;
+    camera.position.x+=(mouseX*12-camera.position.x)*0.03;
+    camera.position.y+=(-mouseY*8-camera.position.y)*0.03;
+    camera.lookAt(scene.position);
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener('resize',()=>{
+    camera.aspect=window.innerWidth/window.innerHeight;camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth,window.innerHeight);
+  });
+})();
+
+/* ============ Hero orb — rotating icosahedron wireframe ============ */
+(function(){
+  const canvas=document.getElementById('orb-canvas');
+  if(!window.THREE)return;
+  const parent=canvas.parentElement;
+  const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true});
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,2));
+  function size(){return Math.min(parent.clientWidth,420);}
+  let W=size(),H=canvas.clientHeight||360;
+  renderer.setSize(canvas.clientWidth||W,H,false);
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(50,(canvas.clientWidth||W)/H,0.1,100);
+  camera.position.z=4.2;
+
+  const group=new THREE.Group();scene.add(group);
+  // core icosahedron
+  const icoG=new THREE.IcosahedronGeometry(1.35,1);
+  const wire=new THREE.WireframeGeometry(icoG);
+  const wmat=new THREE.LineBasicMaterial({color:0x33e0ff,transparent:true,opacity:0.75});
+  group.add(new THREE.LineSegments(wire,wmat));
+  // inner solid glow sphere
+  const glowMat=new THREE.MeshBasicMaterial({color:0x6366f1,transparent:true,opacity:0.10});
+  group.add(new THREE.Mesh(new THREE.SphereGeometry(1.0,32,32),glowMat));
+  // vertex points
+  const vmat=new THREE.PointsMaterial({color:0xa855f7,size:0.07});
+  group.add(new THREE.Points(icoG,vmat));
+  // orbiting ring
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(1.9,0.012,8,120),new THREE.MeshBasicMaterial({color:0x22d3ee,transparent:true,opacity:0.55}));
+  ring.rotation.x=Math.PI/2.3;scene.add(ring);
+  const ring2=new THREE.Mesh(new THREE.TorusGeometry(2.15,0.008,8,120),new THREE.MeshBasicMaterial({color:0x8b5cf6,transparent:true,opacity:0.4}));
+  ring2.rotation.x=Math.PI/1.7;ring2.rotation.y=Math.PI/4;scene.add(ring2);
+
+  let mx=0,my=0;
+  parent.addEventListener('mousemove',e=>{const r=parent.getBoundingClientRect();mx=((e.clientX-r.left)/r.width-0.5)*2;my=((e.clientY-r.top)/r.height-0.5)*2;},{passive:true});
+
+  function animate(){
+    requestAnimationFrame(animate);
+    group.rotation.y+=0.004;group.rotation.x+=0.0016;
+    group.rotation.y+=(mx*0.5-group.rotation.y*0+0)*0; // keep smooth
+    group.rotation.x+=(my*0.0006);
+    ring.rotation.z+=0.006;ring2.rotation.z-=0.004;
+    renderer.render(scene,camera);
+  }
+  animate();
+
+  window.addEventListener('resize',()=>{
+    H=canvas.clientHeight||H;const w=canvas.clientWidth||W;
+    camera.aspect=w/H;camera.updateProjectionMatrix();renderer.setSize(w,H,false);
+  });
+})();
+
+/* ============ 3D tilt on cards ============ */
+(function(){
+  if(window.matchMedia('(pointer:coarse)').matches)return;
+  document.querySelectorAll('.tl-card,.proj,.skill-cat,.hl').forEach(card=>{
+    card.style.transformStyle='preserve-3d';
+    card.addEventListener('mousemove',e=>{
+      const r=card.getBoundingClientRect();
+      const px=(e.clientX-r.left)/r.width-0.5;
+      const py=(e.clientY-r.top)/r.height-0.5;
+      card.style.transform=`perspective(900px) rotateY(${px*5}deg) rotateX(${-py*5}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave',()=>{card.style.transform='';});
+  });
+})();
+</script>
+</body>
+</html>
