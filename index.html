@@ -233,6 +233,8 @@
 
   /* ===== Interactive particle portrait ===== */
   .portrait-stage{position:relative;width:100%;max-width:340px;margin:0 auto}
+  .portrait-stage::before{content:'';position:absolute;left:50%;top:47%;width:90%;height:90%;transform:translate(-50%,-50%);
+    background:radial-gradient(ellipse at 50% 42%,rgba(9,6,24,0.82),rgba(9,6,24,0.4) 58%,transparent 76%);border-radius:26px;z-index:-1}
   .portrait-stage .pcanvas{width:100%;aspect-ratio:300/385;display:block;cursor:crosshair}
   .portrait-stage .pglow{position:absolute;left:50%;top:42%;width:78%;height:70%;transform:translate(-50%,-50%);
     background:radial-gradient(ellipse at center,rgba(139,92,246,.30),rgba(34,211,238,.12) 45%,transparent 70%);
@@ -799,9 +801,9 @@ function buildPortrait(canvas,opt){
       for(let x=0;x<ow;x+=density){
         const i=(y*ow+x)*4, a=data[i+3];
         if(a>70){
-          // lift shadows + subtle cool tint so the face reads on a dark background
+          // gentle lift + faint cool tint, but PRESERVE contrast so features read
           let r=data[i],g=data[i+1],b=data[i+2];
-          r=Math.min(255,48+r*0.94)|0; g=Math.min(255,58+g*0.92)|0; b=Math.min(255,90+b*0.95)|0;
+          r=Math.min(255,20+r*0.92)|0; g=Math.min(255,24+g*0.92)|0; b=Math.min(255,34+b*0.94)|0;
           parts.push({tx:x,ty:y,
             x:ow/2+(Math.random()-0.5)*ow*1.7, y:oh/2+(Math.random()-0.5)*oh*1.7,
             r:r,g:g,b:b});
@@ -834,7 +836,7 @@ function buildPortrait(canvas,opt){
     frame();
   });
 }
-if(document.getElementById('aboutPortrait')) buildPortrait(document.getElementById('aboutPortrait'),{density:2});
+if(document.getElementById('aboutPortrait')) buildPortrait(document.getElementById('aboutPortrait'),{density:3});
 
 /* ============ Cinematic intro overlay ============ */
 (function(){
