@@ -194,6 +194,15 @@
     border:1px solid var(--stroke);color:var(--muted);transition:.25s;cursor:default}
   .chip:hover{color:var(--red);border-color:var(--red);background:#fff5f5;transform:translateY(-2px)}
 
+  /* ===== Skills categorized rows ===== */
+  .skills-list{display:flex;flex-direction:column;border-top:1px solid var(--stroke)}
+  .skill-row{display:grid;grid-template-columns:250px 1fr;gap:26px;align-items:center;padding:24px 4px;border-bottom:1px solid var(--stroke);transition:background .25s}
+  .skill-row:hover{background:#fff7f7}
+  .skill-row .cat{display:flex;align-items:center;gap:13px}
+  .skill-row .cat .ic{width:40px;height:40px;border-radius:11px;flex:none;display:grid;place-items:center;background:#fff4f4;border:1px solid rgba(225,29,42,0.16);color:var(--red)}
+  .skill-row .cat h3{font-size:1.02rem;font-weight:600;color:var(--charcoal);line-height:1.2}
+  .skill-row .chips{display:flex;flex-wrap:wrap;gap:9px}
+  @media(max-width:760px){.skill-row{grid-template-columns:1fr;gap:14px;padding:20px 2px}}
   /* EXPERIENCE */
   .timeline{position:relative;padding-left:38px}
   .timeline::before{content:'';position:absolute;left:10px;top:6px;bottom:6px;width:2px;background:linear-gradient(180deg,var(--red),rgba(225,29,42,.2))}
@@ -439,19 +448,13 @@
       <h2>Full breadth of my toolkit</h2>
       <p>A blend of engineering, data, and enterprise automation capabilities.</p>
     </div>
-    <div class="skills-grid">
-      <div class="skill-cat card reveal"><div class="ch"><h3>Programming &amp; Scripting</h3></div>
-        <div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">Shell Scripting</span><span class="chip">HTML</span></div></div>
-      <div class="skill-cat card reveal"><div class="ch"><h3>Data &amp; Analytics</h3></div>
-        <div class="chips"><span class="chip">EDA</span><span class="chip">Data Engineering</span><span class="chip">Machine Learning</span><span class="chip">Predictive Analytics</span><span class="chip">Statistical Analysis</span><span class="chip">Data-Driven Decisions</span></div></div>
-      <div class="skill-cat card reveal"><div class="ch"><h3>Visualization &amp; Reporting</h3></div>
-        <div class="chips"><span class="chip">Power BI</span><span class="chip">Microsoft Excel</span></div></div>
-      <div class="skill-cat card reveal"><div class="ch"><h3>Cloud, DevOps &amp; Scheduling</h3></div>
-        <div class="chips"><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Control-M</span></div></div>
-      <div class="skill-cat card reveal"><div class="ch"><h3>Automation &amp; Enterprise</h3></div>
-        <div class="chips"><span class="chip">UiPath</span><span class="chip">Automation Anywhere</span><span class="chip">SAP</span><span class="chip">ALM</span></div></div>
-      <div class="skill-cat card reveal"><div class="ch"><h3>Core Concepts</h3></div>
-        <div class="chips"><span class="chip">Data Structures &amp; Algorithms</span><span class="chip">Debugging</span><span class="chip">Model Deployment</span><span class="chip">Data Modeling</span></div></div>
+    <div class="skills-list">
+      <div class="skill-row reveal"><div class="cat"><span class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="8 6 3 12 8 18"/><polyline points="16 6 21 12 16 18"/></svg></span><h3>Programming &amp; Scripting</h3></div><div class="chips"><span class="chip">Python</span><span class="chip">Java</span><span class="chip">MySQL</span><span class="chip">Shell Scripting</span><span class="chip">HTML</span></div></div>
+      <div class="skill-row reveal"><div class="cat"><span class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="3 17 9 11 13 15 21 7"/><polyline points="15 7 21 7 21 13"/></svg></span><h3>Data &amp; Analytics</h3></div><div class="chips"><span class="chip">EDA</span><span class="chip">Data Engineering</span><span class="chip">Machine Learning</span><span class="chip">Predictive Analytics</span><span class="chip">Statistical Analysis</span><span class="chip">Data-Driven Decisions</span></div></div>
+      <div class="skill-row reveal"><div class="cat"><span class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="21" x2="21" y2="21"/><rect x="6" y="10" width="3" height="11"/><rect x="11" y="4" width="3" height="17"/><rect x="16" y="13" width="3" height="8"/></svg></span><h3>Visualization &amp; Reporting</h3></div><div class="chips"><span class="chip">Power BI</span><span class="chip">Microsoft Excel</span></div></div>
+      <div class="skill-row reveal"><div class="cat"><span class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 18a4 4 0 0 1 0-8 5 5 0 0 1 9.58-1.6A3.5 3.5 0 0 1 18 18H7z"/></svg></span><h3>Cloud, DevOps &amp; Scheduling</h3></div><div class="chips"><span class="chip">AWS</span><span class="chip">Docker</span><span class="chip">Git</span><span class="chip">GitHub</span><span class="chip">Control-M</span></div></div>
+      <div class="skill-row reveal"><div class="cat"><span class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 4v3M14 4v3M10 17v3M14 17v3M4 10h3M4 14h3M17 10h3M17 14h3"/></svg></span><h3>Automation &amp; Enterprise</h3></div><div class="chips"><span class="chip">UiPath</span><span class="chip">Automation Anywhere</span><span class="chip">SAP</span><span class="chip">ALM</span></div></div>
+      <div class="skill-row reveal"><div class="cat"><span class="ic"><svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span><h3>Core Concepts</h3></div><div class="chips"><span class="chip">Data Structures &amp; Algorithms</span><span class="chip">Debugging</span><span class="chip">Model Deployment</span><span class="chip">Data Modeling</span></div></div>
     </div>
   </div>
 </section>
