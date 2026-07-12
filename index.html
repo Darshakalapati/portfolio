@@ -171,6 +171,17 @@
   .tech.in .bar i{width:var(--lv)}
   .tech .lvl{font-size:.68rem;color:var(--dim);margin-top:6px;font-family:'JetBrains Mono'}
 
+  /* ===== Skills marquee ===== */
+  .marquee{position:relative;display:flex;flex-direction:column;gap:16px;overflow:hidden;padding:6px 0;
+    -webkit-mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent);mask:linear-gradient(90deg,transparent,#000 7%,#000 93%,transparent)}
+  .mq-track{display:flex;gap:14px;width:max-content;will-change:transform;animation:mqLeft 34s linear infinite}
+  .mq-track.rev{animation:mqRight 40s linear infinite}
+  .marquee:hover .mq-track{animation-play-state:paused}
+  @keyframes mqLeft{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  @keyframes mqRight{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+  .mq-item{flex:none;display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:100px;background:#fff;border:1px solid var(--stroke);box-shadow:var(--shadow);font-weight:600;font-size:.98rem;color:var(--charcoal);white-space:nowrap;transition:border-color .25s,color .25s,transform .25s}
+  .mq-item .d{width:8px;height:8px;border-radius:50%;background:var(--red);flex:none}
+  .mq-item:hover{border-color:var(--red);color:var(--red);transform:translateY(-3px)}
   /* SKILLS */
   .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px}
   .skill-cat{padding:26px}
@@ -413,19 +424,9 @@
       <h2>Tools I work with daily</h2>
       <p>The core tools behind my data migration, automation, and analytics work.</p>
     </div>
-    <div class="tech-grid" id="techGrid">
-      <div class="tech" style="--lv:92%"><div class="nm">Python</div><div class="bar"><i></i></div><div class="lvl">Advanced</div></div>
-      <div class="tech" style="--lv:90%"><div class="nm">SQL</div><div class="bar"><i></i></div><div class="lvl">Advanced</div></div>
-      <div class="tech" style="--lv:88%"><div class="nm">Shell Scripting</div><div class="bar"><i></i></div><div class="lvl">Advanced</div></div>
-      <div class="tech" style="--lv:85%"><div class="nm">Control-M</div><div class="bar"><i></i></div><div class="lvl">Advanced</div></div>
-      <div class="tech" style="--lv:82%"><div class="nm">Power BI</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:80%"><div class="nm">AWS</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:78%"><div class="nm">Docker</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:80%"><div class="nm">Git &amp; GitHub</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:76%"><div class="nm">UiPath</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:78%"><div class="nm">SAP</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:84%"><div class="nm">Java</div><div class="bar"><i></i></div><div class="lvl">Proficient</div></div>
-      <div class="tech" style="--lv:72%"><div class="nm">Machine Learning</div><div class="bar"><i></i></div><div class="lvl">Fundamentals</div></div>
+    <div class="marquee">
+      <div class="mq-track"><span class="mq-item"><span class="d"></span>Python</span><span class="mq-item"><span class="d"></span>SQL</span><span class="mq-item"><span class="d"></span>Shell Scripting</span><span class="mq-item"><span class="d"></span>Control-M</span><span class="mq-item"><span class="d"></span>Power BI</span><span class="mq-item"><span class="d"></span>AWS</span><span class="mq-item"><span class="d"></span>Docker</span><span class="mq-item"><span class="d"></span>Git &amp; GitHub</span><span class="mq-item"><span class="d"></span>UiPath</span><span class="mq-item"><span class="d"></span>SAP</span><span class="mq-item"><span class="d"></span>Java</span><span class="mq-item"><span class="d"></span>Python</span><span class="mq-item"><span class="d"></span>SQL</span><span class="mq-item"><span class="d"></span>Shell Scripting</span><span class="mq-item"><span class="d"></span>Control-M</span><span class="mq-item"><span class="d"></span>Power BI</span><span class="mq-item"><span class="d"></span>AWS</span><span class="mq-item"><span class="d"></span>Docker</span><span class="mq-item"><span class="d"></span>Git &amp; GitHub</span><span class="mq-item"><span class="d"></span>UiPath</span><span class="mq-item"><span class="d"></span>SAP</span><span class="mq-item"><span class="d"></span>Java</span></div>
+      <div class="mq-track rev"><span class="mq-item"><span class="d"></span>Machine Learning</span><span class="mq-item"><span class="d"></span>EDA</span><span class="mq-item"><span class="d"></span>Statistical Analysis</span><span class="mq-item"><span class="d"></span>Predictive Analytics</span><span class="mq-item"><span class="d"></span>Data Engineering</span><span class="mq-item"><span class="d"></span>Automation Anywhere</span><span class="mq-item"><span class="d"></span>ALM</span><span class="mq-item"><span class="d"></span>Microsoft Excel</span><span class="mq-item"><span class="d"></span>MySQL</span><span class="mq-item"><span class="d"></span>Model Deployment</span><span class="mq-item"><span class="d"></span>Machine Learning</span><span class="mq-item"><span class="d"></span>EDA</span><span class="mq-item"><span class="d"></span>Statistical Analysis</span><span class="mq-item"><span class="d"></span>Predictive Analytics</span><span class="mq-item"><span class="d"></span>Data Engineering</span><span class="mq-item"><span class="d"></span>Automation Anywhere</span><span class="mq-item"><span class="d"></span>ALM</span><span class="mq-item"><span class="d"></span>Microsoft Excel</span><span class="mq-item"><span class="d"></span>MySQL</span><span class="mq-item"><span class="d"></span>Model Deployment</span></div>
     </div>
   </div>
 </section>
