@@ -268,6 +268,27 @@
   .idcard .back .row svg{flex:none}
   .idcard .back .back-tag{margin-top:6px;font-size:.68rem;color:#ff8a92;font-family:'JetBrains Mono';letter-spacing:.02em}
   @media(max-width:760px){.edu-grid{grid-template-columns:1fr}}
+  /* ===== Currently exploring band ===== */
+  .explore-band{background:linear-gradient(160deg,#1f2230,#2b2f42);border-radius:22px;padding:clamp(30px,5vw,48px);color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+  .explore-band::after{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,rgba(225,29,42,0.35),transparent 70%)}
+  .explore-head{position:relative;z-index:1}
+  .explore-head .sec-tag{color:#ff8a92}
+  .explore-head h2{color:#fff;font-size:clamp(1.6rem,3.6vw,2.3rem);margin-bottom:10px}
+  .explore-head p{color:#c9cdd8;margin-bottom:24px;font-size:1rem;max-width:560px}
+  .explore-tags{display:flex;flex-wrap:wrap;gap:12px;position:relative;z-index:1}
+  .ex-tag{padding:11px 20px;border-radius:100px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.16);color:#fff;font-weight:600;font-size:.92rem;transition:background .25s,border-color .25s,transform .25s}
+  .ex-tag:hover{background:var(--red);border-color:var(--red);transform:translateY(-3px)}
+  /* ===== Contact form ===== */
+  .contact-form{max-width:520px;margin:0 auto 26px;text-align:left}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+  .contact-form input,.contact-form textarea{width:100%;padding:13px 16px;border:1px solid var(--stroke);border-radius:12px;font-family:'Inter';font-size:.95rem;color:var(--charcoal);background:#fff;transition:border-color .2s}
+  .contact-form input:focus,.contact-form textarea:focus{outline:none;border-color:var(--red)}
+  .contact-form textarea{margin-bottom:14px;resize:vertical}
+  .contact-form .cf-send{width:100%;justify-content:center;cursor:pointer;border:none;font-family:'Inter';padding:14px;border-radius:12px;background:var(--red);color:#fff;font-weight:600;font-size:.98rem;transition:background .25s,transform .25s}
+  .contact-form .cf-send:hover{background:var(--red-dark);transform:translateY(-2px)}
+  .cf-note{margin-top:12px;font-size:.85rem;color:var(--red);min-height:1.2em;text-align:center}
+  .cf-or{text-align:center;color:var(--dim);font-size:.82rem;margin:6px 0 18px;letter-spacing:.03em}
+  @media(max-width:560px){.cf-row{grid-template-columns:1fr}}
   /* CONTACT */
   #contact{text-align:center}
   .contact-card{padding:clamp(40px,7vw,72px);text-align:center;background:linear-gradient(160deg,#fff,#fff4f4)}
@@ -610,6 +631,27 @@
   </div>
 </section>
 
+<!-- CURRENTLY EXPLORING -->
+<section id="exploring">
+  <div class="wrap">
+    <div class="explore-band reveal">
+      <div class="explore-head">
+        <span class="sec-tag">currently exploring</span>
+        <h2>What I'm learning now</h2>
+        <p>Actively deepening my skills in the tools shaping modern data and AI — turning today's research into tomorrow's production systems.</p>
+      </div>
+      <div class="explore-tags">
+        <span class="ex-tag">Generative AI</span>
+        <span class="ex-tag">Retrieval-Augmented Generation (RAG)</span>
+        <span class="ex-tag">AI Agents</span>
+        <span class="ex-tag">LLM Fine-Tuning</span>
+        <span class="ex-tag">MLOps</span>
+        <span class="ex-tag">Vector Databases</span>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- EDUCATION + CERTS -->
 <section id="education">
   <div class="wrap">
@@ -672,6 +714,16 @@
       <span class="sec-tag" style="text-align:center">get in touch</span>
       <h2>Let's build something <span class="g">data-driven</span>.</h2>
       <p>Open to Data Science, Data Engineering, and Analytics roles. I'd love to hear about your team and the problems you're solving.</p>
+      <form class="contact-form" id="cform">
+        <div class="cf-row">
+          <input type="text" name="name" placeholder="Your name" required />
+          <input type="email" name="email" placeholder="Your email" required />
+        </div>
+        <textarea name="message" placeholder="Your message" rows="4" required></textarea>
+        <button type="submit" class="cf-send">Send message →</button>
+        <p class="cf-note" id="cfNote"></p>
+      </form>
+      <p class="cf-or">— or reach me directly —</p>
       <div class="contact-links">
         <a href="mailto:iamdarshak12@gmail.com" class="cbtn prim">✉️ Email me</a>
         <a href="https://linkedin.com/in/alapatidarshak" target="_blank" rel="noopener" class="cbtn">in LinkedIn</a>
@@ -715,6 +767,16 @@ if(toTop){window.addEventListener('scroll',()=>toTop.classList.toggle('show',win
     (function tick(now){let p=Math.min(1,(now-st)/1200);p=1-Math.pow(1-p,3);el.textContent=Math.round(t*p)+suf;if(p<1)requestAnimationFrame(tick);})(st);}
   const o=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){run(e.target);o.unobserve(e.target);}});},{threshold:.4});
   ns.forEach(n=>o.observe(n));})();
+/* contact form (mailto) */
+(function(){const f=document.getElementById('cform');if(!f)return;
+  f.addEventListener('submit',function(e){e.preventDefault();
+    const g=s=>f.querySelector('[name='+s+']').value.trim();
+    const nm=g('name'),em=g('email'),ms=g('message');
+    const sub=encodeURIComponent('Portfolio inquiry from '+nm);
+    const bd=encodeURIComponent(ms+'\n\n— '+nm+' ('+em+')');
+    window.location.href='mailto:iamdarshak12@gmail.com?subject='+sub+'&body='+bd;
+    document.getElementById('cfNote').textContent='Opening your email app… if nothing happens, email me at iamdarshak12@gmail.com';});
+})();
 
 /* tech bars animate in */
 const tio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');tio.unobserve(e.target);}});},{threshold:0.3});
