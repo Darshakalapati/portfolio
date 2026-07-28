@@ -401,8 +401,8 @@
   <div class="wrap">
     <div class="hero-grid">
       <div class="hero-left">
-        <span class="eyebrow"><span class="pulse"></span>Available for Data Science &amp; Engineering roles</span>
-        <h1>Turning <span class="g">complex data</span><br/>into reliable systems.</h1>
+        <span class="eyebrow"><span class="pulse"></span>Open to Data Science, Data Engineering &amp; AI roles</span>
+        <h1>Turning <span class="g">complex data</span><br/>into intelligent, reliable systems.</h1>
         <p class="hero-role"><span class="tw" id="typed"></span><span class="cursor"></span></p>
         <p class="hero-desc">Software engineer and data scientist with 3+ years delivering large-scale data migration, implementation, and workflow automation for enterprise clients. I engineer end-to-end legacy-to-modern migrations and safeguard data integrity, accuracy, and security with SQL, Control-M, and SAP — and, with a Master's in Data Science, I now build analytics, machine-learning, and AI-driven applications from data pipeline to production.</p>
         <div class="hero-cta">
@@ -419,8 +419,8 @@
       </div>
       <div class="orb-wrap">
         <canvas id="orb-canvas"></canvas>
-        <div class="orb-badge b1"><span class="mono">&lt;/&gt;</span> Shell &amp; Python</div>
-        <div class="orb-badge b2"><span class="mono">◆</span> SQL · Control-M</div>
+        <div class="orb-badge b1"><span class="mono">&lt;/&gt;</span> Python · SQL</div>
+        <div class="orb-badge b2"><span class="mono">◆</span> GenAI · LLM APIs</div>
         <div class="orb-badge b3"><span class="mono">▤</span> Power BI · AWS</div>
         <div class="orb-badge b4"><span class="mono">▦</span> Machine Learning · EDA</div>
       </div>
@@ -617,7 +617,6 @@
           <li>Deployed the live application via GitHub-to-Vercel CI/CD, with custom DNS managed through GoDaddy for production release.</li>
         </ul>
         <div class="ptags"><span class="chip">Python</span><span class="chip">Claude API</span><span class="chip">Gemini API</span><span class="chip">ATS</span><span class="chip">JSON Schema</span><span class="chip">Vercel CI/CD</span></div>
-        <a class="proj-live" href="https://www.ezapply.pro/" target="_blank" rel="noopener">Visit live site ↗</a>
       </div>
       <div class="proj card reveal" data-cat="threed">
         <span class="pnum">Project 04 · 3D Data Visualization</span>
@@ -788,7 +787,7 @@ const tio=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.
 document.querySelectorAll('.tech').forEach(el=>tio.observe(el));
 
 /* typing */
-const roles=['Data Scientist','Software Engineering Analyst','Data Migration & Workflow Automation','SQL · Control-M · Shell Scripting','Analytics & Machine Learning'];
+const roles=['Data Scientist','Data Engineer','Machine Learning Engineer','AI & GenAI Developer','Software Engineer'];
 const typed=document.getElementById('typed');let ri=0,ci=0,del=false;
 function type(){const w=roles[ri];typed.textContent=del?w.slice(0,ci--):w.slice(0,ci++);let d=del?45:90;if(!del&&ci===w.length+1){del=true;d=1400;}else if(del&&ci<0){del=false;ci=0;ri=(ri+1)%roles.length;d=250;}setTimeout(type,d);}
 type();
