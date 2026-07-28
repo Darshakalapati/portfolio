@@ -218,6 +218,14 @@
   .tl-card li{position:relative;padding-left:22px;color:var(--muted);font-size:.94rem}
   .tl-card li::before{content:'▹';position:absolute;left:0;color:var(--red)}
 
+  /* ===== Project filter + hover accent ===== */
+  .proj-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px}
+  .pf-btn{padding:9px 18px;border-radius:100px;border:1px solid var(--stroke);background:#fff;color:var(--muted);font-weight:600;font-size:.9rem;cursor:pointer;transition:border-color .25s,color .25s,background .25s}
+  .pf-btn:hover{border-color:var(--red);color:var(--red)}
+  .pf-btn.active{background:var(--red);border-color:var(--red);color:#fff}
+  .proj.hide{display:none}
+  .proj::after{content:'';position:absolute;top:0;left:0;height:3px;width:0;background:var(--grad);transition:width .45s cubic-bezier(.2,.8,.2,1);z-index:3}
+  .proj:hover::after{width:100%}
   /* PROJECTS */
   .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}
   .proj{padding:30px;display:flex;flex-direction:column}
@@ -524,8 +532,15 @@
       <h2>Selected data work</h2>
       <p>Applied projects across data engineering, analytics, AI-powered automation, and interactive 3D.</p>
     </div>
+    <div class="proj-filter reveal">
+      <button class="pf-btn active" data-f="all">All</button>
+      <button class="pf-btn" data-f="research">Research</button>
+      <button class="pf-btn" data-f="analytics">Analytics</button>
+      <button class="pf-btn" data-f="ai">AI &amp; Automation</button>
+      <button class="pf-btn" data-f="threed">3D</button>
+    </div>
     <div class="proj-grid">
-      <div class="proj card reveal">
+      <div class="proj card reveal" data-cat="research">
         <span class="pnum">Project 01 · Research</span>
         <h3>Kansas Board of Regents Survey</h3>
         <p class="pdesc">Analyzed National Survey of College Graduates (NSCG) data to compare employment outcomes of community-college starters against state and university students.</p>
@@ -536,9 +551,8 @@
           <li>Performed statistical hypothesis testing and descriptive regression summaries to quantify group differences over six survey years.</li>
         </ul>
         <div class="ptags"><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">VS Code</span><span class="chip">Statistics</span><span class="chip">EDA</span></div>
-        <a class="proj-link" href="https://github.com/Darshakalapati" target="_blank" rel="noopener">Code &amp; more on GitHub ↗</a>
       </div>
-      <div class="proj card reveal">
+      <div class="proj card reveal" data-cat="analytics">
         <span class="pnum">Project 02 · Analytics</span>
         <h3>Storytelling Case Study — Airbnb, NYC</h3>
         <p class="pdesc">Conducted comprehensive exploratory data analysis on New York City Airbnb listings and applied data storytelling to turn complex insights into clear, actionable narratives.</p>
@@ -549,9 +563,8 @@
           <li>Delivered strategic insights supporting data-driven decisions for NYC-focused business units.</li>
         </ul>
         <div class="ptags"><span class="chip">Excel</span><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Data Storytelling</span></div>
-        <a class="proj-link" href="https://github.com/Darshakalapati" target="_blank" rel="noopener">Code &amp; more on GitHub ↗</a>
       </div>
-      <div class="proj card reveal">
+      <div class="proj card reveal" data-cat="ai">
         <span class="pnum">Project 03 · AI &amp; Automation</span>
         <h3>AI-Powered Resume Tailoring &amp; Job Data Engine</h3>
         <p class="pdesc">An automated pipeline that parses unstructured resumes, aligns candidate data to job-description schemas, and re-frames content for ATS optimization using large language models.</p>
@@ -562,9 +575,8 @@
           <li>Deployed the live application via GitHub-to-Vercel CI/CD, with custom DNS managed through GoDaddy for production release.</li>
         </ul>
         <div class="ptags"><span class="chip">Python</span><span class="chip">Claude API</span><span class="chip">Gemini API</span><span class="chip">ATS</span><span class="chip">JSON Schema</span><span class="chip">Vercel CI/CD</span></div>
-        <a class="proj-link" href="https://github.com/Darshakalapati" target="_blank" rel="noopener">Code &amp; more on GitHub ↗</a>
       </div>
-      <div class="proj card reveal">
+      <div class="proj card reveal" data-cat="threed">
         <span class="pnum">Project 04 · 3D Data Visualization</span>
         <h3>Interactive 3D Healthcare Analytics &amp; Diagnostic Platform</h3>
         <p class="pdesc">An interactive 3D web platform for pharmaceutical data visualization — letting users explore diagnostic tests and human anatomy, with blood-test parameters, doctor availability, and appointment workflows.</p>
@@ -574,7 +586,6 @@
           <li>Leveraged Cursor AI and Claude Code CLI to streamline WebGL state-management logic and optimize large 3D asset payload delivery.</li>
         </ul>
         <div class="ptags"><span class="chip">WebGL</span><span class="chip">Three.js</span><span class="chip">REST API</span><span class="chip">Data Visualization</span><span class="chip">Healthcare</span></div>
-        <a class="proj-link" href="https://github.com/Darshakalapati" target="_blank" rel="noopener">Code &amp; more on GitHub ↗</a>
       </div>
     </div>
   </div>
@@ -671,6 +682,10 @@ type();
 /* ID card flip */
 const idc=document.getElementById('idcard');
 if(idc)idc.addEventListener('click',()=>idc.classList.toggle('flipped'));
+/* project filter */
+(function(){const btns=document.querySelectorAll('.pf-btn');if(!btns.length)return;const cards=document.querySelectorAll('.proj[data-cat]');
+  btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.f;
+    cards.forEach(c=>{c.classList.toggle('hide',!(f==='all'||c.dataset.cat===f));});}));})();
 
 /* comic card tilt */
 (function(){const c=document.getElementById('comicCard');if(!c||window.matchMedia('(pointer:coarse)').matches)return;
