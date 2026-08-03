@@ -230,14 +230,33 @@
   .proj:hover::after{width:100%}
   /* PROJECTS */
   .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}
-  .proj{padding:30px;display:flex;flex-direction:column}
+  /* flip card */
+  .proj{height:440px;perspective:1700px;cursor:pointer;background:none;border:none;box-shadow:none;padding:0}
+  .flip-in{position:relative;width:100%;height:100%;transition:transform .75s cubic-bezier(.4,.15,.2,1);transform-style:preserve-3d}
+  .proj.flipped .flip-in{transform:rotateY(180deg)}
+  .pface{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;
+    background:var(--panel);border:1px solid var(--stroke);border-radius:var(--radius);box-shadow:var(--shadow);
+    padding:28px 30px;display:flex;flex-direction:column;overflow:hidden;transition:border-color .25s,box-shadow .25s}
+  .proj:hover .pface{border-color:var(--red);box-shadow:var(--shadow-lg)}
+  .pback{transform:rotateY(180deg)}
   .proj .pnum{font-family:'JetBrains Mono';font-size:.78rem;color:var(--red);margin-bottom:14px;font-weight:600}
-  .proj h3{font-size:1.35rem;font-weight:600;margin-bottom:12px;color:var(--charcoal)}
-  .proj .pdesc{color:var(--muted);font-size:.95rem;margin-bottom:18px}
-  .proj ul{list-style:none;display:grid;gap:8px;margin-bottom:20px}
-  .proj li{position:relative;padding-left:20px;color:var(--muted);font-size:.9rem}
-  .proj li::before{content:'→';position:absolute;left:0;color:var(--red)}
-  .proj .ptags{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+  .pfront h3{font-size:1.42rem;font-weight:600;color:var(--charcoal);line-height:1.24}
+  .pf-tagline{color:var(--muted);font-size:.92rem;margin-top:12px}
+  .pf-used{margin-top:auto}
+  .pf-lbl{display:block;font-family:'JetBrains Mono';font-size:.66rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);margin-bottom:11px}
+  .proj .ptags{display:flex;flex-wrap:wrap;gap:8px}
+  .pback h3{font-size:1.12rem;font-weight:600;color:var(--charcoal);line-height:1.22;margin-bottom:10px}
+  .pback .pdesc{color:var(--muted);font-size:.88rem;margin-bottom:13px}
+  .pback-body{overflow-y:auto;padding-right:6px;flex:1;min-height:0}
+  .pback ul{list-style:none;display:grid;gap:9px;margin:0}
+  .pback li{position:relative;padding-left:18px;color:var(--muted);font-size:.845rem;line-height:1.45}
+  .pback li::before{content:'→';position:absolute;left:0;color:var(--red)}
+  .pback-body::-webkit-scrollbar{width:5px}
+  .pback-body::-webkit-scrollbar-thumb{background:rgba(225,29,42,.32);border-radius:3px}
+  .flip-cue{margin-top:14px;flex:none;font-family:'JetBrains Mono';font-size:.72rem;color:var(--dim);display:inline-flex;align-items:center;gap:7px}
+  .flip-cue .cx{color:var(--red);font-size:.9rem}
+  .proj:hover .flip-cue{color:var(--red)}
+  .pback .proj-live{margin-top:13px;align-self:flex-start}
 
   /* EDU + CERTS */
   .two-col{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:start}
@@ -576,8 +595,8 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="sec-tag">projects</span>
-      <h2>Selected data work</h2>
-      <p>Applied projects across data engineering, analytics, AI-powered automation, and interactive 3D.</p>
+      <h2>Featured projects</h2>
+      <p>Applied work across data engineering, analytics, AI-powered automation, and interactive 3D. Click any card to flip it for the full breakdown.</p>
     </div>
     <div class="proj-filter reveal">
       <button class="pf-btn active" data-f="all">All</button>
@@ -587,53 +606,117 @@
       <button class="pf-btn" data-f="threed">3D</button>
     </div>
     <div class="proj-grid">
-      <div class="proj card reveal" data-cat="research">
-        <span class="pnum">Project 01 · Research</span>
-        <h3>Kansas Board of Regents Survey</h3>
-        <p class="pdesc">Analyzed National Survey of College Graduates (NSCG) data to compare employment outcomes of community-college starters against state and university students.</p>
-        <ul>
-          <li>Evaluated wage levels, job types, and employment status to identify potential career or wage penalties across education pathways.</li>
-          <li>Cleaned and harmonized multi-year NSCG datasets — resolving schema differences, handling nulls, and removing high-missing-rate variables.</li>
-          <li>Filtered implausible values, winsorized salary data, and conducted EDA on salary distributions and inflation-adjusted trends.</li>
-          <li>Performed statistical hypothesis testing and descriptive regression summaries to quantify group differences over six survey years.</li>
-        </ul>
-        <div class="ptags"><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">VS Code</span><span class="chip">Statistics</span><span class="chip">EDA</span></div>
+      <div class="proj reveal" data-cat="research" tabindex="0" role="button" aria-label="Flip card: Kansas Board of Regents Survey">
+        <div class="flip-in">
+          <div class="pface pfront">
+            <span class="pnum">Project 01 · Research</span>
+            <h3>Kansas Board of Regents Survey</h3>
+            <p class="pf-tagline">Employment-outcome analysis of college-graduate survey data across education pathways.</p>
+            <div class="pf-used">
+              <span class="pf-lbl">Built with</span>
+              <div class="ptags"><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">VS Code</span><span class="chip">Statistics</span><span class="chip">EDA</span></div>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Flip for details</span>
+          </div>
+          <div class="pface pback">
+            <span class="pnum">Project 01 · Research</span>
+            <h3>Kansas Board of Regents Survey</h3>
+            <div class="pback-body">
+              <p class="pdesc">Analyzed National Survey of College Graduates (NSCG) data to compare employment outcomes of community-college starters against state and university students.</p>
+              <ul>
+                <li>Evaluated wage levels, job types, and employment status to identify potential career or wage penalties across education pathways.</li>
+                <li>Cleaned and harmonized multi-year NSCG datasets — resolving schema differences, handling nulls, and removing high-missing-rate variables.</li>
+                <li>Filtered implausible values, winsorized salary data, and conducted EDA on salary distributions and inflation-adjusted trends.</li>
+                <li>Performed statistical hypothesis testing and descriptive regression summaries to quantify group differences over six survey years.</li>
+              </ul>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Back</span>
+          </div>
+        </div>
       </div>
-      <div class="proj card reveal" data-cat="analytics">
-        <span class="pnum">Project 02 · Analytics</span>
-        <h3>Storytelling Case Study — Airbnb, NYC</h3>
-        <p class="pdesc">Conducted comprehensive exploratory data analysis on New York City Airbnb listings and applied data storytelling to turn complex insights into clear, actionable narratives.</p>
-        <ul>
-          <li>Analyzed NYC Airbnb listing data to identify patterns, trends, and operational opportunities.</li>
-          <li>Applied data storytelling techniques to translate complex insights into clear, actionable narratives.</li>
-          <li>Developed two audience-specific presentations — one for data-analysis leadership, one for acquisitions, operations, and UX teams.</li>
-          <li>Delivered strategic insights supporting data-driven decisions for NYC-focused business units.</li>
-        </ul>
-        <div class="ptags"><span class="chip">Excel</span><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Data Storytelling</span></div>
+      <div class="proj reveal" data-cat="analytics" tabindex="0" role="button" aria-label="Flip card: Storytelling Case Study Airbnb NYC">
+        <div class="flip-in">
+          <div class="pface pfront">
+            <span class="pnum">Project 02 · Analytics</span>
+            <h3>Storytelling Case Study — Airbnb, NYC</h3>
+            <p class="pf-tagline">Exploratory analysis of NYC Airbnb listings turned into clear, decision-ready narratives.</p>
+            <div class="pf-used">
+              <span class="pf-lbl">Built with</span>
+              <div class="ptags"><span class="chip">Excel</span><span class="chip">Python</span><span class="chip">Power BI</span><span class="chip">Data Storytelling</span></div>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Flip for details</span>
+          </div>
+          <div class="pface pback">
+            <span class="pnum">Project 02 · Analytics</span>
+            <h3>Storytelling Case Study — Airbnb, NYC</h3>
+            <div class="pback-body">
+              <p class="pdesc">Conducted comprehensive exploratory data analysis on New York City Airbnb listings and applied data storytelling to turn complex insights into clear, actionable narratives.</p>
+              <ul>
+                <li>Analyzed NYC Airbnb listing data to identify patterns, trends, and operational opportunities.</li>
+                <li>Applied data storytelling techniques to translate complex insights into clear, actionable narratives.</li>
+                <li>Developed two audience-specific presentations — one for data-analysis leadership, one for acquisitions, operations, and UX teams.</li>
+                <li>Delivered strategic insights supporting data-driven decisions for NYC-focused business units.</li>
+              </ul>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Back</span>
+          </div>
+        </div>
       </div>
-      <div class="proj card reveal" data-cat="ai">
-        <span class="pnum">Project 03 · AI &amp; Automation</span>
-        <h3>AI-Powered Resume Tailoring &amp; Job Data Engine</h3>
-        <p class="pdesc">An automated pipeline that parses unstructured resumes, aligns candidate data to job-description schemas, and re-frames content for ATS optimization using large language models.</p>
-        <ul>
-          <li>Architected an automated data pipeline that parses unstructured resume files (PDF/DOCX) and maps candidate entity data against target job-description (JD) schemas.</li>
-          <li>Integrated Claude and Gemini APIs for semantic text extraction, skill-gap analytics, and dynamic re-framing of resume bullet points for ATS (Applicant Tracking System) optimization.</li>
-          <li>Accelerated development with Claude Code CLI and Cursor AI for modular script generation, automated data validation, and JSON schema enforcement.</li>
-          <li>Deployed the live application via GitHub-to-Vercel CI/CD, with custom DNS managed through GoDaddy for production release.</li>
-        </ul>
-        <div class="ptags"><span class="chip">Python</span><span class="chip">Claude API</span><span class="chip">Gemini API</span><span class="chip">ATS</span><span class="chip">JSON Schema</span><span class="chip">Vercel CI/CD</span></div>
+      <div class="proj reveal" data-cat="ai" tabindex="0" role="button" aria-label="Flip card: AI-Powered Resume Tailoring and Job Data Engine">
+        <div class="flip-in">
+          <div class="pface pfront">
+            <span class="pnum">Project 03 · AI &amp; Automation</span>
+            <h3>AI-Powered Resume Tailoring &amp; Job Data Engine</h3>
+            <p class="pf-tagline">LLM-driven pipeline that aligns resumes to job schemas and optimizes them for ATS.</p>
+            <div class="pf-used">
+              <span class="pf-lbl">Built with</span>
+              <div class="ptags"><span class="chip">Python</span><span class="chip">Claude API</span><span class="chip">Gemini API</span><span class="chip">ATS</span><span class="chip">JSON Schema</span><span class="chip">Vercel CI/CD</span></div>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Flip for details</span>
+          </div>
+          <div class="pface pback">
+            <span class="pnum">Project 03 · AI &amp; Automation</span>
+            <h3>AI-Powered Resume Tailoring &amp; Job Data Engine</h3>
+            <div class="pback-body">
+              <p class="pdesc">An automated pipeline that parses unstructured resumes, aligns candidate data to job-description schemas, and re-frames content for ATS optimization using large language models.</p>
+              <ul>
+                <li>Architected an automated data pipeline that parses unstructured resume files (PDF/DOCX) and maps candidate entity data against target job-description (JD) schemas.</li>
+                <li>Integrated Claude and Gemini APIs for semantic text extraction, skill-gap analytics, and dynamic re-framing of resume bullet points for ATS (Applicant Tracking System) optimization.</li>
+                <li>Accelerated development with Claude Code CLI and Cursor AI for modular script generation, automated data validation, and JSON schema enforcement.</li>
+                <li>Deployed the live application via GitHub-to-Vercel CI/CD, with custom DNS managed through GoDaddy for production release.</li>
+              </ul>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Back</span>
+          </div>
+        </div>
       </div>
-      <div class="proj card reveal" data-cat="threed">
-        <span class="pnum">Project 04 · 3D Data Visualization</span>
-        <h3>Interactive 3D Healthcare Analytics &amp; Diagnostic Platform</h3>
-        <p class="pdesc">An interactive 3D web platform for pharmaceutical data visualization — letting users explore diagnostic tests and human anatomy, with blood-test parameters, doctor availability, and appointment workflows.</p>
-        <ul>
-          <li>Engineered an interactive 3D web platform for pharmaceutical data visualization, enabling users to explore structured medical diagnostic tests and human anatomy data.</li>
-          <li>Built backend API integration to process, map, and render diagnostic blood-test parameters, doctor-profile availability, and appointment-scheduling workflows.</li>
-          <li>Leveraged Cursor AI and Claude Code CLI to streamline WebGL state-management logic and optimize large 3D asset payload delivery.</li>
-        </ul>
-        <div class="ptags"><span class="chip">WebGL</span><span class="chip">Three.js</span><span class="chip">REST API</span><span class="chip">Data Visualization</span><span class="chip">Healthcare</span></div>
-        <a class="proj-live" href="https://www.pharmagenerichouse.com/" target="_blank" rel="noopener">Visit live site ↗</a>
+      <div class="proj reveal" data-cat="threed" tabindex="0" role="button" aria-label="Flip card: Interactive 3D Healthcare Analytics and Diagnostic Platform">
+        <div class="flip-in">
+          <div class="pface pfront">
+            <span class="pnum">Project 04 · 3D Data Visualization</span>
+            <h3>Interactive 3D Healthcare Analytics &amp; Diagnostic Platform</h3>
+            <p class="pf-tagline">A 3D web platform for exploring diagnostic tests, anatomy, and appointment workflows.</p>
+            <div class="pf-used">
+              <span class="pf-lbl">Built with</span>
+              <div class="ptags"><span class="chip">WebGL</span><span class="chip">Three.js</span><span class="chip">REST API</span><span class="chip">Data Visualization</span><span class="chip">Healthcare</span></div>
+            </div>
+            <span class="flip-cue"><span class="cx">⇄</span> Flip for details</span>
+          </div>
+          <div class="pface pback">
+            <span class="pnum">Project 04 · 3D Data Visualization</span>
+            <h3>Interactive 3D Healthcare Analytics &amp; Diagnostic Platform</h3>
+            <div class="pback-body">
+              <p class="pdesc">An interactive 3D web platform for pharmaceutical data visualization — letting users explore diagnostic tests and human anatomy, with blood-test parameters, doctor availability, and appointment workflows.</p>
+              <ul>
+                <li>Engineered an interactive 3D web platform for pharmaceutical data visualization, enabling users to explore structured medical diagnostic tests and human anatomy data.</li>
+                <li>Built backend API integration to process, map, and render diagnostic blood-test parameters, doctor-profile availability, and appointment-scheduling workflows.</li>
+                <li>Leveraged Cursor AI and Claude Code CLI to streamline WebGL state-management logic and optimize large 3D asset payload delivery.</li>
+              </ul>
+            </div>
+            <a class="proj-live" href="https://www.pharmagenerichouse.com/" target="_blank" rel="noopener">Visit live site ↗</a>
+            <span class="flip-cue"><span class="cx">⇄</span> Back</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -800,10 +883,15 @@ type();
 /* ID card flip */
 const idc=document.getElementById('idcard');
 if(idc)idc.addEventListener('click',()=>idc.classList.toggle('flipped'));
+/* project flip cards */
+(function(){document.querySelectorAll('.proj[data-cat]').forEach(card=>{
+  card.addEventListener('click',e=>{if(e.target.closest('a'))return;card.classList.toggle('flipped');});
+  card.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();card.classList.toggle('flipped');}});
+});})();
 /* project filter */
 (function(){const btns=document.querySelectorAll('.pf-btn');if(!btns.length)return;const cards=document.querySelectorAll('.proj[data-cat]');
   btns.forEach(b=>b.addEventListener('click',()=>{btns.forEach(x=>x.classList.remove('active'));b.classList.add('active');const f=b.dataset.f;
-    cards.forEach(c=>{c.classList.toggle('hide',!(f==='all'||c.dataset.cat===f));});}));})();
+    cards.forEach(c=>{c.classList.remove('flipped');c.classList.toggle('hide',!(f==='all'||c.dataset.cat===f));});}));})();
 
 /* comic card tilt */
 (function(){const c=document.getElementById('comicCard');if(!c||window.matchMedia('(pointer:coarse)').matches)return;
@@ -814,7 +902,7 @@ if(idc)idc.addEventListener('click',()=>idc.classList.toggle('flipped'));
 
 /* card tilt (subtle) */
 (function(){if(window.matchMedia('(pointer:coarse)').matches)return;
-  document.querySelectorAll('.tl-card,.proj,.skill-cat').forEach(card=>{
+  document.querySelectorAll('.tl-card,.skill-cat').forEach(card=>{
     card.addEventListener('mousemove',e=>{const r=card.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-0.5,py=(e.clientY-r.top)/r.height-0.5;card.style.transform=`perspective(900px) rotateY(${px*3.5}deg) rotateX(${-py*3.5}deg) translateY(-3px)`;});
     card.addEventListener('mouseleave',()=>{card.style.transform='';});
   });
