@@ -231,7 +231,7 @@
   /* PROJECTS */
   .proj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:22px}
   /* flip card */
-  .proj{height:440px;perspective:1700px;cursor:pointer;background:none;border:none;box-shadow:none;padding:0}
+  .proj{height:474px;perspective:1700px;cursor:pointer;background:none;border:none;box-shadow:none;padding:0}
   .flip-in{position:relative;width:100%;height:100%;transition:transform .75s cubic-bezier(.4,.15,.2,1);transform-style:preserve-3d}
   .proj.flipped .flip-in{transform:rotateY(180deg)}
   .pface{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;
@@ -239,9 +239,16 @@
     padding:28px 30px;display:flex;flex-direction:column;overflow:hidden;transition:border-color .25s,box-shadow .25s}
   .proj:hover .pface{border-color:var(--red);box-shadow:var(--shadow-lg)}
   .pback{transform:rotateY(180deg)}
-  .proj .pnum{font-family:'JetBrains Mono';font-size:.78rem;color:var(--red);margin-bottom:14px;font-weight:600}
-  .pfront h3{font-size:1.42rem;font-weight:600;color:var(--charcoal);line-height:1.24}
-  .pf-tagline{color:var(--muted);font-size:.92rem;margin-top:12px}
+  .proj .pnum{font-family:'JetBrains Mono';font-size:.78rem;color:var(--red);margin-bottom:12px;font-weight:600}
+  .pfront h3{font-size:1.28rem;font-weight:600;color:var(--charcoal);line-height:1.24}
+  .pf-tagline{color:var(--muted);font-size:.9rem;margin-top:10px;line-height:1.5}
+  /* project thumbnail banner */
+  .pthumb{margin:-28px -30px 16px;height:132px;flex:none;overflow:hidden;position:relative;background:#1f2230}
+  .pthumb img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+  .proj:hover .pthumb img{transform:scale(1.05)}
+  .pthumb svg{width:100%;height:100%;display:block}
+  .pthumb .tzoom{transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:center}
+  .proj:hover .pthumb .tzoom{transform:scale(1.05)}
   .pf-used{margin-top:auto}
   .pf-lbl{display:block;font-family:'JetBrains Mono';font-size:.66rem;text-transform:uppercase;letter-spacing:.09em;color:var(--dim);margin-bottom:11px}
   .proj .ptags{display:flex;flex-wrap:wrap;gap:8px}
@@ -317,6 +324,10 @@
   #contact h2{font-size:clamp(2rem,5vw,3.2rem);margin-bottom:16px}
   #contact h2 .g{color:var(--red)}
   #contact p{color:var(--muted);max-width:520px;margin:0 auto 32px;font-size:1.05rem}
+  .avail-line{display:inline-flex;align-items:center;gap:9px;margin:0 auto 30px;padding:9px 18px;border-radius:100px;
+    background:rgba(52,211,153,0.10);border:1px solid rgba(52,211,153,0.32);color:#0f9d63;
+    font-family:'JetBrains Mono';font-size:.82rem;font-weight:600;letter-spacing:.01em}
+  .avail-line .avdot{width:8px;height:8px;border-radius:50%;background:#10b981;box-shadow:0 0 0 3px rgba(16,185,129,.18);flex:none}
   .contact-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
   .cbtn{display:inline-flex;align-items:center;gap:10px;padding:14px 24px;border-radius:12px;border:1px solid var(--stroke);
     background:#fff;transition:.28s;font-weight:600;font-size:.95rem;box-shadow:var(--shadow)}
@@ -609,6 +620,7 @@
       <div class="proj reveal" data-cat="research" tabindex="0" role="button" aria-label="Flip card: Kansas Board of Regents Survey">
         <div class="flip-in">
           <div class="pface pfront">
+            <div class="pthumb"><svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="gt1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#262a40"/><stop offset="1" stop-color="#1c1f2c"/></linearGradient></defs><rect width="320" height="132" fill="url(#gt1)"/><circle cx="58" cy="20" r="66" fill="#e11d2a" opacity="0.13"/><g class="tzoom"><line x1="46" y1="104" x2="286" y2="104" stroke="#4a4f66" stroke-width="2"/><rect x="70" y="66" width="26" height="38" rx="3" fill="#c9ccd6"/><rect x="112" y="48" width="26" height="56" rx="3" fill="#e11d2a"/><rect x="154" y="76" width="26" height="28" rx="3" fill="#c9ccd6"/><rect x="196" y="38" width="26" height="66" rx="3" fill="#ff8a92"/><rect x="238" y="58" width="26" height="46" rx="3" fill="#c9ccd6"/></g></svg></div>
             <span class="pnum">Project 01 · Research</span>
             <h3>Kansas Board of Regents Survey</h3>
             <p class="pf-tagline">Employment-outcome analysis of college-graduate survey data across education pathways.</p>
@@ -637,6 +649,7 @@
       <div class="proj reveal" data-cat="analytics" tabindex="0" role="button" aria-label="Flip card: Storytelling Case Study Airbnb NYC">
         <div class="flip-in">
           <div class="pface pfront">
+            <div class="pthumb"><svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="gt2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f2230"/><stop offset="1" stop-color="#2b2f47"/></linearGradient><linearGradient id="gt2a" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#e11d2a" stop-opacity="0.45"/><stop offset="1" stop-color="#e11d2a" stop-opacity="0"/></linearGradient></defs><rect width="320" height="132" fill="url(#gt2)"/><g class="tzoom"><path d="M28 96 L80 74 L132 82 L184 50 L236 62 L296 34 L296 116 L28 116 Z" fill="url(#gt2a)"/><polyline points="28,96 80,74 132,82 184,50 236,62 296,34" fill="none" stroke="#ff8a92" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><g fill="#fff"><circle cx="80" cy="74" r="4"/><circle cx="184" cy="50" r="4"/><circle cx="296" cy="34" r="4"/></g><circle cx="132" cy="82" r="3.5" fill="#e11d2a"/><circle cx="236" cy="62" r="3.5" fill="#e11d2a"/></g></svg></div>
             <span class="pnum">Project 02 · Analytics</span>
             <h3>Storytelling Case Study — Airbnb, NYC</h3>
             <p class="pf-tagline">Exploratory analysis of NYC Airbnb listings turned into clear, decision-ready narratives.</p>
@@ -665,6 +678,7 @@
       <div class="proj reveal" data-cat="ai" tabindex="0" role="button" aria-label="Flip card: AI-Powered Resume Tailoring and Job Data Engine">
         <div class="flip-in">
           <div class="pface pfront">
+            <div class="pthumb"><svg viewBox="0 0 320 132" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="gt3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1f2230"/><stop offset="1" stop-color="#3a1116"/></linearGradient></defs><rect width="320" height="132" fill="url(#gt3)"/><circle cx="250" cy="26" r="72" fill="#e11d2a" opacity="0.16"/><g class="tzoom"><rect x="40" y="34" width="74" height="70" rx="8" fill="#ffffff" opacity="0.94"/><rect x="53" y="49" width="48" height="5.5" rx="2.75" fill="#c9ccd6"/><rect x="53" y="62" width="48" height="5.5" rx="2.75" fill="#c9ccd6"/><rect x="53" y="75" width="30" height="5.5" rx="2.75" fill="#e11d2a"/><rect x="53" y="88" width="40" height="5.5" rx="2.75" fill="#c9ccd6"/><g stroke="#ff8a92" stroke-width="2"><line x1="168" y1="66" x2="214" y2="42"/><line x1="168" y1="66" x2="220" y2="70"/><line x1="168" y1="66" x2="210" y2="98"/></g><circle cx="168" cy="66" r="8" fill="#e11d2a"/><circle cx="216" cy="40" r="6" fill="#ff8a92"/><circle cx="222" cy="70" r="6" fill="#ff8a92"/><circle cx="210" cy="98" r="6" fill="#ff8a92"/></g></svg></div>
             <span class="pnum">Project 03 · AI &amp; Automation</span>
             <h3>AI-Powered Resume Tailoring &amp; Job Data Engine</h3>
             <p class="pf-tagline">LLM-driven pipeline that aligns resumes to job schemas and optimizes them for ATS.</p>
@@ -693,6 +707,7 @@
       <div class="proj reveal" data-cat="threed" tabindex="0" role="button" aria-label="Flip card: Interactive 3D Healthcare Analytics and Diagnostic Platform">
         <div class="flip-in">
           <div class="pface pfront">
+            <div class="pthumb"><img src="thumb-healthcare.jpg" alt="Screenshot of the 3D healthcare platform showing a rotating 3D capsule and hero headline" loading="lazy"></div>
             <span class="pnum">Project 04 · 3D Data Visualization</span>
             <h3>Interactive 3D Healthcare Analytics &amp; Diagnostic Platform</h3>
             <p class="pf-tagline">A 3D web platform for exploring diagnostic tests, anatomy, and appointment workflows.</p>
@@ -805,7 +820,8 @@
     <div class="contact-card card reveal">
       <span class="sec-tag" style="text-align:center">get in touch</span>
       <h2>Let's build something <span class="g">data-driven</span>.</h2>
-      <p>Open to Data Science, Data Engineering, and Analytics roles. I'd love to hear about your team and the problems you're solving.</p>
+      <p>Open to Data Science, Data Engineering, and AI roles. I'd love to hear about your team and the problems you're solving.</p>
+      <p class="avail-line"><span class="avdot"></span> Available for full-time roles &nbsp;·&nbsp; US &amp; Remote &nbsp;·&nbsp; Open to relocation</p>
       <form class="contact-form" id="cform">
         <div class="cf-row">
           <input type="text" name="name" placeholder="Your name" required />
