@@ -383,6 +383,74 @@
     .burger.x span:nth-child(2){opacity:0}
     .burger.x span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
   }
+  /* ============================================================
+     PREMIUM POLISH & RESPONSIVE HARDENING  (overrides above)
+     ============================================================ */
+  /* anchor links never hide a heading under the sticky nav */
+  section[id]{scroll-margin-top:88px}
+  /* use small-viewport height so mobile browser bars don't cause jumps */
+  #hero{min-height:100vh;min-height:100svh}
+  /* safety: if IntersectionObserver is unavailable, show everything */
+  .no-io .reveal{opacity:1!important;transform:none!important}
+  /* richer, layered depth for a more premium feel */
+  :root{--shadow:0 1px 2px rgba(25,27,40,.04),0 8px 24px rgba(25,27,40,.06);
+         --shadow-lg:0 2px 6px rgba(25,27,40,.05),0 20px 50px rgba(25,27,40,.10)}
+  /* keep long hero role text on one tidy line */
+  .hero-role{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+  /* ---------- Tablet / small laptop ---------- */
+  @media(max-width:1024px){
+    .hero-grid{gap:32px}
+    .hero-stats{gap:24px 30px}
+    .orb-badge{font-size:.76rem;padding:9px 12px}
+    .two-col{gap:26px}
+  }
+
+  /* ---------- Hero & sections stack (tablet ↓) ---------- */
+  @media(max-width:900px){
+    #hero{min-height:auto;padding-top:108px;padding-bottom:24px}
+    .hero-grid{grid-template-columns:1fr;gap:8px}
+    .hero-left{order:0}
+    .orb-wrap{order:0;margin-top:26px;min-height:300px}
+    .orb-badge{display:none}            /* remove floating clutter when stacked */
+    .hero-desc{max-width:none}
+    .aboutme{gap:22px}
+    .aboutme .am-copy{text-align:left}  /* readable body copy, not centered */
+    .comic-stage{max-width:360px}
+    .sec-head{margin-bottom:38px}
+  }
+
+  /* ---------- Phones ---------- */
+  @media(max-width:620px){
+    section{padding:60px 0}
+    #hero{padding-top:100px}
+    #hero h1{margin-bottom:16px}
+    .hero-role{font-size:1.02rem}
+    .hero-cta{gap:10px}
+    .hero-cta .btn{flex:1 1 46%;justify-content:center;padding:13px 18px}
+    .hero-cta .btn-primary{flex-basis:100%}
+    .hero-stats{gap:18px 22px}
+    .hero-stats .s{flex:1 1 40%}
+    .hero-stats .n{font-size:1.7rem}
+    .orb-wrap{min-height:250px;margin-top:14px}
+    #orb-canvas{height:250px}
+    .sec-head{margin-bottom:32px}
+    .proj{height:474px}                 /* extra room so backs don't clip */
+    .idcard{width:100%;max-width:300px}
+    .explore-band{border-radius:18px}
+    .mq-item{font-size:.92rem;padding:11px 19px}
+  }
+
+  /* ---------- Small phones ---------- */
+  @media(max-width:400px){
+    .wrap{padding:0 18px}
+    .eyebrow{font-size:.66rem;letter-spacing:.07em;padding:6px 12px}
+    .hero-cta .btn{flex-basis:100%}
+    .hero-stats .n{font-size:1.55rem}
+    .tl-card{padding:22px 20px}
+    .skill-cat,.cert-card{padding:20px}
+  }
+
   @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.reveal{opacity:1;transform:none}}
 </style>
 </head>
@@ -849,8 +917,11 @@ burger.addEventListener('click',()=>{navlinks.classList.toggle('open');burger.cl
 navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navlinks.classList.remove('open');burger.classList.remove('x');}));
 
 /* reveal */
+if(!('IntersectionObserver' in window)){document.documentElement.classList.add('no-io');document.querySelectorAll('.reveal').forEach(el=>el.classList.add('in'));}
 const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.12});
 document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+/* ultimate safety net: never leave content hidden */
+window.addEventListener('load',()=>setTimeout(()=>document.querySelectorAll('.reveal:not(.in)').forEach(el=>{const r=el.getBoundingClientRect();if(r.top<window.innerHeight){el.classList.add('in');}}),1200));
 const toTop=document.getElementById('toTop');
 if(toTop){window.addEventListener('scroll',()=>toTop.classList.toggle('show',window.scrollY>560),{passive:true});toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));}
 /* animated count-up stats */
